@@ -21,7 +21,7 @@
         android:id="@+id/nav_shippingprices"
         android:name="com.gocloud.goshipapp.ui.shippingprices.ShippingPricesFragment"
         android:label="@string/menu_shippingprices"
-        tools:layout="@layout/fragment_shippingprices" />
+        tools:layout="@layout/fragment_shipping_prices" />
 
     <fragment
         android:id="@+id/nav_tools"
@@ -40,4 +40,16 @@
         android:name="com.gocloud.goshipapp.ui.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
+
+    <fragment
+        android:id="@+id/nav_orderscustomer"
+        android:name="com.gocloud.goshipapp.ui.orderscustomer.OrdersCustomerFragment"
+        android:label="@string/menu_orders_customer"
+        tools:layout="@layout/fragment_orders_customer" />
+
+    <fragment
+        android:id="@+id/nav_ordersvendor"
+        android:name="com.gocloud.goshipapp.ui.ordersvendor.OrdersVendorFragment"
+        android:label="@string/menu_orders_vendor"
+        tools:layout="@layout/fragment_orders_vendor" />
 </navigation>

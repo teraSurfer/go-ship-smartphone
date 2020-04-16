@@ -17,6 +17,14 @@
             android:icon="@drawable/ic_local_shipping_black_24dp"
             android:title="@string/menu_shippingprices" />
         <item
+            android:id="@+id/nav_orderscustomer"
+            android:icon="@drawable/ic_shopping_cart_black_24dp"
+            android:title="@string/menu_orders_customer" />
+        <item
+            android:id="@+id/nav_ordersvendor"
+            android:icon="@drawable/ic_shopping_cart_black_24dp"
+            android:title="@string/menu_orders_vendor" />
+        <item
             android:id="@+id/nav_tools"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/menu_tools" />
