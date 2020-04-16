@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/nav_estimate"
-        android:name="com.gocloud.goshipapp.ui.gallery.EstimateFragment"
+        android:name="com.gocloud.goshipapp.ui.estimate.EstimateFragment"
         android:label="@string/menu_estimate"
         tools:layout="@layout/fragment_estimate" />
 
     <fragment
         android:id="@+id/nav_shippingprices"
-        android:name="com.gocloud.goshipapp.ui.slideshow.ShippingPricesFragment"
+        android:name="com.gocloud.goshipapp.ui.shippingprices.ShippingPricesFragment"
         android:label="@string/menu_shippingprices"
         tools:layout="@layout/fragment_shippingprices" />
 
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/nav_chatbot"
-        android:name="com.gocloud.goshipapp.ui.share.ChatbotFragment"
+        android:name="com.gocloud.goshipapp.ui.chatbot.ChatbotFragment"
         android:label="@string/menu_chatbot"
         tools:layout="@layout/fragment_chatbot" />
 

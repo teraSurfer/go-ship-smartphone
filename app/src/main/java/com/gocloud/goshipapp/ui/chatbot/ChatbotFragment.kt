@@ -1,4 +1,4 @@
-package com.gocloud.goshipapp.ui.share
+package com.gocloud.goshipapp.ui.chatbot
 
 import android.os.Bundle
 import android.view.LayoutInflater

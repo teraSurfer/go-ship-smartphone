@@ -1,4 +1,4 @@
-package com.gocloud.goshipapp.ui.slideshow
+package com.gocloud.goshipapp.ui.shippingprices
 
 import android.os.Bundle
 import android.view.LayoutInflater

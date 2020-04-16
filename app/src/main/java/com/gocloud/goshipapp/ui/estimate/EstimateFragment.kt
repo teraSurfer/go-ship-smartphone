@@ -1,4 +1,4 @@
-package com.gocloud.goshipapp.ui.gallery
+package com.gocloud.goshipapp.ui.estimate
 
 import android.os.Bundle
 import android.view.LayoutInflater
