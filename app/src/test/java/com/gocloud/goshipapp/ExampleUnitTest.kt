@@ -1,4 +1,4 @@
-package com.gocloud.app
+package com.gocloud.goshipapp
 
 import org.junit.Test
 
