@@ -8,15 +8,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.gocloud.goshipapp.R
 import com.gocloud.goshipapp.databinding.FragmentOrdersVendorBinding
+import com.sacefe.weatherapp.ui.weather.ListAdapter
 
 
 class OrdersVendorFragment : Fragment() {
-
-    //companion object {
-    //    fun newInstance() = OrdersVendorFragment()
-    //}
 
     private lateinit var ordersVendorViewModel: OrdersVendorViewModel
     private lateinit var binding: FragmentOrdersVendorBinding
@@ -32,10 +30,16 @@ class OrdersVendorFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentOrdersVendorBinding>(inflater,
             R.layout.fragment_orders_vendor, container, false)
 
-        ordersVendorViewModel.text.observe(viewLifecycleOwner, Observer {
-            binding.textVendorsorders.text = it
-        })
 
+        ordersVendorViewModel.vmListOrders.observe(viewLifecycleOwner, Observer {
+            binding.ordersCustomerList.apply {
+                // set a LinearLayoutManager to handle Android
+                // RecyclerView behavior
+                layoutManager = LinearLayoutManager(activity)
+                // set the custom adapter to the RecyclerView
+                adapter = ListAdapter(it)
+            }
+        })
 
         return  binding.root
 
