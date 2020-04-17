@@ -45,11 +45,23 @@
         android:id="@+id/nav_orderscustomer"
         android:name="com.gocloud.goshipapp.ui.orderscustomer.OrdersCustomerFragment"
         android:label="@string/menu_orders_customer"
-        tools:layout="@layout/fragment_orders_customer" />
+        tools:layout="@layout/fragment_orders_customer" >
+        <action
+            android:id="@+id/action_nav_orderscustomer_to_nav_orderDetails"
+            app:destination="@id/nav_orderDetails" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_ordersvendor"
         android:name="com.gocloud.goshipapp.ui.ordersvendor.OrdersVendorFragment"
         android:label="@string/menu_orders_vendor"
-        tools:layout="@layout/fragment_orders_vendor" />
+        tools:layout="@layout/fragment_orders_vendor" >
+        <action
+            android:id="@+id/action_nav_ordersvendor_to_nav_orderDetails2"
+            app:destination="@id/nav_orderDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_orderDetails"
+        android:name="com.gocloud.goshipapp.ui.orderdetails.OrderDetailsFragment"
+        android:label="@string/menu_orders_details" />
 </navigation>
