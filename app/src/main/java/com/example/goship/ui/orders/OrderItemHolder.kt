@@ -3,54 +3,39 @@ package com.example.goship.ui.orders
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.goship.R
 
-//Equivalent to ModelView
+//Holder or the recycler as part of the fragment
 class OrderItemHolder(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.fragment_order_item_list, parent, false)) {
 
 //    private lateinit var binding: orderItemHolder
 
-    private var mCityId: TextView? = null
-    private var mCityName: TextView? = null
+    private var mOrderId: TextView? = null
+    private var mOrderDate: TextView? = null
+    private var mOrderAtt1: TextView? = null
+    private var mOrderAtt2: TextView? = null
 
 
     init {
-        mCityId =   itemView.findViewById(R.id.textOrderId)
-        mCityName = itemView.findViewById(R.id.textOrderStatus)
+        mOrderId =   itemView.findViewById(R.id.textOrderId)
+        mOrderDate = itemView.findViewById(R.id.textDate)
+        mOrderAtt1 = itemView.findViewById(R.id.textAttr1)
+        mOrderAtt2 = itemView.findViewById(R.id.textAttr2)
 
         itemView?.setOnClickListener {
-            //val itsCityIdTextView? =   itemView.findViewById(R.id.textCity).
-            //val itsCityName: TextView? = itemView.findViewById(R.id.textCityName)
-            val miii = 10
-//                val action  = WeatherFragmentDirections.actionNavWeatherToNavCity(weatherPosition = position!!)
-//                view.findNavController().navigate(action)
+            //Future use
         }
     }
 
-    fun bind(order: CustomerOrders) {
-        mCityId?.text = "Order Id:  ${order.orderId.toString()}"
-        mCityName?.text ="Order Status:  ${order.status}"
+    fun bind(order: Orders) {
+        mOrderId?.text =  HtmlCompat.fromHtml("<b>Order Id:</b>  ${order.orderId.toString()}" , HtmlCompat.FROM_HTML_MODE_COMPACT)
+        mOrderDate?.text = HtmlCompat.fromHtml ("<b>${order.p_date}</b>" , HtmlCompat.FROM_HTML_MODE_COMPACT)
+        mOrderAtt1?.text = HtmlCompat.fromHtml( "<b>Customer email:</b>  ${order.u_email}", HtmlCompat.FROM_HTML_MODE_COMPACT   )  //Customer: v_name   or vendor: u_email
+        mOrderAtt2?.text =  HtmlCompat.fromHtml("<b>Price: </b>  $${order.price}", HtmlCompat.FROM_HTML_MODE_COMPACT)      //Customer: v_mobile r vendor: price
     }
 
 }
 
-//CODE OK
-//class orderItemHolder(inflater: LayoutInflater, parent: ViewGroup) :
-//    RecyclerView.ViewHolder(inflater.inflate(R.layout.item_weather_list_fragment, parent, false)) {
-//    private var mCityId: TextView? = null
-//    private var mCityName: TextView? = null
-//
-//
-//    init {
-//        mCityId = itemView.findViewById(R.id.textCity)
-//        mCityName = itemView.findViewById(R.id.textCityName)
-//    }
-//
-//    fun bind(city: CityInfo) {
-//        mCityId?.text = city.cityId.toString()
-//        mCityName?.text = city.cityName
-//    }
-//
-//}
