@@ -14,6 +14,7 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
+
     <!-- Common Strings -->
     <string name="shipping_image_description">Shipping Image</string>
 
@@ -25,4 +26,5 @@
 
     <!-- Orders -->
     <string name="menu_order">Orders</string>
+    <string name="menu_order_details">Orders Details</string>
 </resources>

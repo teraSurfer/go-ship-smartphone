@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 
 class OrderViewModel : ViewModel() {
 
-    private val _listOrders = MutableLiveData<List<CustomerOrders>>().apply {
+    private val _listOrders = MutableLiveData<List<Orders>>().apply {
         value =  DataManager.customerOrders.values.toList()
     }
-    val vmListOrders: LiveData<List<CustomerOrders>> = _listOrders
+    val vmListOrders: LiveData<List<Orders>> = _listOrders
 }
