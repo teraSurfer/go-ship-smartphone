@@ -2,6 +2,7 @@ package com.example.goship.ui.vendor.price
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 
 import com.example.goship.R
 import com.example.goship.databinding.FragmentShowLeastPriceBinding
@@ -20,9 +22,9 @@ class ShowLeastPriceFragment : Fragment() {
     private lateinit var showLeastPriceViewModel: ShowLeastPriceViewModel
 
 
-    companion object {
-        fun newInstance() = ShowLeastPriceFragment()
-    }
+//    companion object {
+//        fun newInstance() = ShowLeastPriceFragment()
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,14 +35,28 @@ class ShowLeastPriceFragment : Fragment() {
 
         showLeastPriceViewModel = ViewModelProviders.of(this).get(ShowLeastPriceViewModel::class.java)
 
+        binding.sourceAutoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
+            showLeastPriceViewModel.sourcedivision.value = showLeastPriceViewModel.divisions.value!![position]
+        }
+
+        binding.destinationAutoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
+            showLeastPriceViewModel.destinationdivision.value = showLeastPriceViewModel.divisions.value!![position]
+        }
+
         showLeastPriceViewModel.divisions.observe(viewLifecycleOwner, Observer { newdivisions ->
             val adapter = ArrayAdapter(requireContext(), R.layout.list_item, newdivisions)
             (binding.sourceTextField.editText as? AutoCompleteTextView)?.setAdapter(adapter)
             (binding.destinationTextField.editText as? AutoCompleteTextView)?.setAdapter(adapter)
         })
 
-        return binding.root
+        binding.vendorGetPriceButtonId.setOnClickListener { view: View ->
+            Navigation.findNavController(view).navigate(
+                ShowLeastPriceFragmentDirections.actionNavVendorEstimateToUpdateLeastPriceFragment(sourcedivision = binding.sourceAutoCompleteTextView.text.toString(), destinationdivision = binding.destinationAutoCompleteTextView.text.toString())
+            )
+        }
 
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -11,12 +11,16 @@ import retrofit2.Response
 class ShowLeastPriceViewModel : ViewModel() {
 
     val divisions = MutableLiveData<List<String>>()
+    val sourcedivision = MutableLiveData<String>()
+    val destinationdivision = MutableLiveData<String>()
 
     /**
      * Call getDivisions() on init so we can display status immediately.
      */
     init {
         getDivisions()
+        sourcedivision.value = ""
+        destinationdivision.value = ""
     }
 
     private fun getDivisions() {

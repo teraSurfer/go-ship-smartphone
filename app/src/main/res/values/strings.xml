@@ -18,11 +18,18 @@
     <!-- Common Strings -->
     <string name="shipping_image_description">Shipping Image</string>
 
-    <!-- Price -->
+    <!-- Vendor Price -->
     <string name="menu_vendor_price">Price</string>
-    <string name="string_source_region">Source Region</string>
-    <string name="string_destination_region">Destination Region</string>
+    <string name="fragment_label_vendor_get_price">Get Shipping Price</string>
+    <string name="string_source_region">Source</string>
+    <string name="string_destination_region">Destination</string>
     <string name="button_vendor_get_price">Show Least Price</string>
+    <string name="fragment_label_vendor_update_price">Update Shipping Price</string>
+    <string name="string_least_price">Least Price</string>
+    <string name="button_update_price">Update Price</string>
+    <string name="warning_price_should_be_less">Price should be less than the current price</string>
+    <string name="error_failed_price_update">Error in Updating Price </string>
+    <string name="info_successful_price_update">Price Successfully Updated</string>
 
     <!-- Orders -->
     <string name="menu_order">Orders</string>
