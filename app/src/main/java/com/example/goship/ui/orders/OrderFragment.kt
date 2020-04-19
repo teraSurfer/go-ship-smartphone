@@ -42,9 +42,10 @@ class OrderFragment : Fragment() {
                 // RecyclerView behavior
                 layoutManager = activity?.let { it1 -> LinearLayoutManager(it1) }
                 // set the custom adapter to the RecyclerView
-                adapter = OrderListAdapter(it)
+                adapter = OrderListAdapter(it, orderViewModel)
             }
         })
+
         return binding.root
     }
 

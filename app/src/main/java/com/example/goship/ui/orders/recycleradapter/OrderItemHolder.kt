@@ -11,7 +11,6 @@ class OrderItemHolder(val binding: FragmentOrderItemListBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
 
-
     private var mOrderId: TextView? = null
     private var mOrderDate: TextView? = null
     private var mOrderAtt1: TextView? = null

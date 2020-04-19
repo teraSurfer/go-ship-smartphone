@@ -19,10 +19,6 @@
         <action
             android:id="@+id/action_nav_order_to_nav_orderDetails"
             app:destination="@id/nav_orderDetails" />
-        <argument
-            android:name="orderPosition"
-            app:argType="integer"
-            android:defaultValue="0" />
     </fragment>
 
     <fragment
@@ -57,5 +53,10 @@
     <fragment
         android:id="@+id/nav_orderDetails"
         android:name="com.example.goship.ui.orders.orderdetails.OrderDetailsFragment"
-        android:label="@string/menu_order_details" />
+        android:label="@string/menu_order_details" >
+        <argument
+            android:name="orderPosition"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>
