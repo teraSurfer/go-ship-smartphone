@@ -11,12 +11,15 @@ import com.example.goship.R
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.goship.databinding.FragmentOrderBinding
+import com.example.goship.ui.orders.recycleradapter.OrderListAdapter
 
 
 class OrderFragment : Fragment() {
-    //companion object {
-    //    fun newInstance() = OrderFragment()
-    //}
+
+    companion object {
+        fun newInstance() = OrderFragment()
+    }
+
 
     private lateinit var orderViewModel: OrderViewModel
     private lateinit var binding: FragmentOrderBinding
@@ -32,25 +35,15 @@ class OrderFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentOrderBinding>(inflater,
             R.layout.fragment_order, container, false)
 
-//        ordersCustomerViewModel.text.observe(viewLifecycleOwner, Observer {
-//            binding.textCustomerorders.text = it
-//        })
-
 
         orderViewModel.vmListOrders.observe(viewLifecycleOwner, Observer {
             binding.ordersCustomerList.apply {
                 // set a LinearLayoutManager to handle Android
                 // RecyclerView behavior
-                layoutManager = LinearLayoutManager(activity)
+                layoutManager = activity?.let { it1 -> LinearLayoutManager(it1) }
                 // set the custom adapter to the RecyclerView
-                adapter = ListAdapter(it)
+                adapter = OrderListAdapter(it)
             }
-//            .getAdapterPositio // .listItemsRcy.adapter.  .setOnItemClickListener { parent, view:View, position, id ->
-////                val action  =  OrdersCustomerFragmentDirections.actionNavOrderscustomerToNavOrderDetails
-////                view.findNavController().navigate(action)
-//                Navigation.findNavController(view).navigate(R.id.action_nav_orderscustomer_to_nav_orderDetails)
-//            }
-
         })
         return binding.root
     }
@@ -58,6 +51,7 @@ class OrderFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        orderViewModel = ViewModelProvider(this).get(orderViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

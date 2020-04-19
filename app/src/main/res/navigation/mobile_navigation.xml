@@ -15,7 +15,15 @@
         android:id="@+id/nav_order"
         android:name="com.example.goship.ui.orders.OrderFragment"
         android:label="@string/menu_order"
-        tools:layout="@layout/fragment_order" />
+        tools:layout="@layout/fragment_order" >
+        <action
+            android:id="@+id/action_nav_order_to_nav_orderDetails"
+            app:destination="@id/nav_orderDetails" />
+        <argument
+            android:name="orderPosition"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
@@ -46,4 +54,8 @@
         android:name="com.example.goship.ui.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
+    <fragment
+        android:id="@+id/nav_orderDetails"
+        android:name="com.example.goship.ui.orders.orderdetails.OrderDetailsFragment"
+        android:label="@string/menu_order_details" />
 </navigation>
