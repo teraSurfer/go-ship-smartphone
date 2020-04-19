@@ -4,7 +4,7 @@ import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.goship.databinding.FragmentOrderItemListBinding
-import com.example.goship.ui.orders.Orders
+import com.example.goship.dataproperty.OrdersFromAPI
 
 //Holder or the recycler as part of the Orders fragment
 class OrderItemHolder(val binding: FragmentOrderItemListBinding) :
@@ -24,11 +24,11 @@ class OrderItemHolder(val binding: FragmentOrderItemListBinding) :
         mOrderAtt2 = binding.textAttr2
     }
 
-    fun bind(order: Orders) {
-        mOrderId?.text =  HtmlCompat.fromHtml("<b>Order Id:</b>  ${order.orderId.toString()}" , HtmlCompat.FROM_HTML_MODE_COMPACT)
-        mOrderDate?.text = HtmlCompat.fromHtml ("<b>${order.p_date}</b>" , HtmlCompat.FROM_HTML_MODE_COMPACT)
-        mOrderAtt1?.text = HtmlCompat.fromHtml( "<b>Customer email:</b>  ${order.u_email}", HtmlCompat.FROM_HTML_MODE_COMPACT   )  //Customer: v_name   or vendor: u_email
-        mOrderAtt2?.text =  HtmlCompat.fromHtml("<b>Price: </b>  $${order.price}", HtmlCompat.FROM_HTML_MODE_COMPACT)      //Customer: v_mobile r vendor: price
+    fun bind(order: OrdersFromAPI) {
+        mOrderId?.text =  HtmlCompat.fromHtml(order.id, HtmlCompat.FROM_HTML_MODE_COMPACT)
+        mOrderDate?.text = HtmlCompat.fromHtml (order.p_date , HtmlCompat.FROM_HTML_MODE_COMPACT)
+        mOrderAtt1?.text = HtmlCompat.fromHtml( order.uemail_vname, HtmlCompat.FROM_HTML_MODE_COMPACT   )  //Customer: v_name   or vendor: u_email
+        mOrderAtt2?.text =  HtmlCompat.fromHtml(order.price_vmobile, HtmlCompat.FROM_HTML_MODE_COMPACT)      //Customer: v_mobile r vendor: price
     }
 
 }

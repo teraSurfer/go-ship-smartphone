@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.goship.databinding.FragmentOrderItemListBinding
+import com.example.goship.dataproperty.OrdersFromAPI
 import com.example.goship.ui.orders.OrderFragmentDirections
 import com.example.goship.ui.orders.OrderViewModel
-import com.example.goship.ui.orders.Orders
 
 
 //Adapter recycler as part of the Orders fragment
-class OrderListAdapter(private val list: List<Orders>, private var orderViewModel: OrderViewModel)
+class OrderListAdapter(private val list: List<OrdersFromAPI>, private var orderViewModel: OrderViewModel)
     : RecyclerView.Adapter<OrderItemHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderItemHolder {
@@ -22,7 +22,7 @@ class OrderListAdapter(private val list: List<Orders>, private var orderViewMode
 
 
     override fun onBindViewHolder(holderOrder: OrderItemHolder, position: Int) {
-        val order: Orders = list[position]
+        val order: OrdersFromAPI = list[position]
         holderOrder.bind(order)
 
         holderOrder.itemView.setOnClickListener {

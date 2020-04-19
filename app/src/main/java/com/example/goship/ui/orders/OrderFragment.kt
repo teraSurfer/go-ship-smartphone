@@ -35,7 +35,6 @@ class OrderFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentOrderBinding>(inflater,
             R.layout.fragment_order, container, false)
 
-
         orderViewModel.vmListOrders.observe(viewLifecycleOwner, Observer {
             binding.ordersCustomerList.apply {
                 // set a LinearLayoutManager to handle Android
