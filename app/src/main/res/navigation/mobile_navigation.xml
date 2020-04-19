@@ -8,8 +8,25 @@
     <fragment
         android:id="@+id/nav_vendor_estimate"
         android:name="com.example.goship.ui.vendor.price.ShowLeastPriceFragment"
-        android:label="@string/menu_vendor_price"
-        tools:layout="@layout/fragment_show_least_price" />
+        android:label="@string/fragment_label_vendor_get_price"
+        tools:layout="@layout/fragment_show_least_price" >
+        <action
+            android:id="@+id/action_nav_vendor_estimate_to_updateLeastPriceFragment"
+            app:destination="@id/updateLeastPriceFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/updateLeastPriceFragment"
+        android:name="com.example.goship.ui.vendor.price.UpdateLeastPriceFragment"
+        android:label="@string/fragment_label_vendor_update_price"
+        tools:layout="@layout/fragment_update_least_price">
+        <argument
+            android:name="sourcedivision"
+            app:argType="string" />
+        <argument
+            android:name="destinationdivision"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_order"
