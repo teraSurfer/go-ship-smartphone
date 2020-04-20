@@ -8,9 +8,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import com.example.goship.dataproperty.DivisionProperty
-import com.example.goship.dataproperty.OrdersProperty
 import retrofit2.http.Query
 import com.example.goship.dataproperty.LeastPriceProperty
+import com.example.goship.dataproperty.OrderSingle
+import com.example.goship.dataproperty.OrdersAll
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.http.Body
@@ -86,29 +87,43 @@ object UpdateLeastPriceAPI {
 /*****************API FOR ORDERS****************************************
  * A public interfaces that exposes the [getProperties] method
  */
-interface GetClientOrdersService {
+//Set orders from client
+interface GetClientAllOrdersService {
     @GET("/orders") //realestate Retrofit appends the endpoint to the base URL
     fun getProperties(@Query("u_email") u_email: String):
-            Call<OrdersProperty>
+            Call<OrdersAll>
 }
-interface GetVendorOrdersService {
-    @GET("/orders") //realestate Retrofit appends the endpoint to the base URL
-    fun getProperties(@Query("v_email") v_email: String):
-            Call<OrdersProperty>
-}
-
 /**
  * A public Api object that exposes the lazy-initialized Retrofit service
  * each time your app calls WeatherApi.retrofitService, it will get a singleton Retrofit object that implements ApiService.
  */
-object OrdersClientAPI {
-    val retrofitService : GetClientOrdersService by lazy {
-        retrofit.create(GetClientOrdersService::class.java) }
+object ClientAllOrdersAPI {
+    val retrofitService : GetClientAllOrdersService by lazy {
+        retrofit.create(GetClientAllOrdersService::class.java) }
     //The Retrofit create() method creates the Retrofit service itself with the ApiService interface.
 }
-object OrdersVendorAPI {
-    val retrofitService : GetClientOrdersService by lazy {
-        retrofit.create(GetClientOrdersService::class.java) }
+
+//Set orders from vendor**
+interface GetVendorAllOrdersService {
+    @GET("/orders") //realestate Retrofit appends the endpoint to the base URL
+    fun getProperties(@Query("v_email") v_email: String):
+            Call<OrdersAll>
+}
+object VendorAllOrdersAPI {
+    val retrofitService : GetVendorAllOrdersService by lazy {
+        retrofit.create(GetVendorAllOrdersService::class.java) }
+    //The Retrofit create() method creates the Retrofit service itself with the ApiService interface.
+}
+
+//Single order get for vendor or customer**
+interface GetOrderService {
+    @GET("/order") //realestate Retrofit appends the endpoint to the base URL
+    fun getProperties(@Query("id") id: String
+    ):Call<OrderSingle>
+}
+object OrderAPI {
+    val retrofitService : GetOrderService by lazy {
+        retrofit.create(GetOrderService::class.java) }
     //The Retrofit create() method creates the Retrofit service itself with the ApiService interface.
 }
 /****************END orders API*****************************************/
