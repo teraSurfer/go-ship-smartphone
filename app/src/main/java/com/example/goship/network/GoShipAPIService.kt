@@ -8,12 +8,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import com.example.goship.dataproperty.DivisionProperty
+import com.example.goship.dataproperty.OrdersProperty
+import retrofit2.http.Query
 import com.example.goship.dataproperty.LeastPriceProperty
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.http.Body
 import retrofit2.http.POST
-import retrofit2.http.Query
+
 
 //private const val BASE_URL = "http://10.0.2.2:3000"
 private const val BASE_URL = "https://api.cmpe282.terasurfer.com"
@@ -78,3 +80,35 @@ object UpdateLeastPriceAPI {
         retrofit.create(UpdateLeastPriceService::class.java)
     }
 }
+
+
+
+/*****************API FOR ORDERS****************************************
+ * A public interfaces that exposes the [getProperties] method
+ */
+interface GetClientOrdersService {
+    @GET("/orders") //realestate Retrofit appends the endpoint to the base URL
+    fun getProperties(@Query("u_email") u_email: String):
+            Call<OrdersProperty>
+}
+interface GetVendorOrdersService {
+    @GET("/orders") //realestate Retrofit appends the endpoint to the base URL
+    fun getProperties(@Query("v_email") v_email: String):
+            Call<OrdersProperty>
+}
+
+/**
+ * A public Api object that exposes the lazy-initialized Retrofit service
+ * each time your app calls WeatherApi.retrofitService, it will get a singleton Retrofit object that implements ApiService.
+ */
+object OrdersClientAPI {
+    val retrofitService : GetClientOrdersService by lazy {
+        retrofit.create(GetClientOrdersService::class.java) }
+    //The Retrofit create() method creates the Retrofit service itself with the ApiService interface.
+}
+object OrdersVendorAPI {
+    val retrofitService : GetClientOrdersService by lazy {
+        retrofit.create(GetClientOrdersService::class.java) }
+    //The Retrofit create() method creates the Retrofit service itself with the ApiService interface.
+}
+/****************END orders API*****************************************/
