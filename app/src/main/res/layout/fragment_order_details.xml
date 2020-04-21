@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
   <FrameLayout
       android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.orders.orderdetails.OrderDetailsFragment">
+      android:layout_height="match_parent"
+      tools:context=".ui.orders.orderdetails.OrderDetailsFragment">
 
     <TextView
         android:id="@+id/textOrderPosition"
@@ -44,298 +44,310 @@
         app:fabSize="mini"
         app:srcCompat="@drawable/ic_chevron_left_white_24dp" />
 
-    <ScrollView
-        android:id="@+id/scrollView2"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-      <LinearLayout
+      <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical">
+          android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <TextView
+            android:id="@+id/textSelectIdLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif-black"
+            android:hint="Select Id:"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinnerId"
+            style="@android:style/Widget.Material.Spinner.Underlined"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="start|top"
+            android:popupBackground="@color/colorPrimary"
+            android:popupElevation="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@+id/textSelectIdLabel"
+            app:layout_constraintTop_toTopOf="parent"/>
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <ScrollView
+          android:id="@+id/scrollView2"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_marginTop="8dp"
+          android:layout_marginBottom="12dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-          <TextView
-              android:id="@+id/textSelectIdLabel"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_gravity="top|start"
-              android:layout_marginStart="16dp"
-              android:layout_marginTop="12dp"
-              android:fontFamily="sans-serif-black"
-              android:hint="Select Id:"
-              android:textSize="24sp"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toTopOf="parent" />
-
-          <Spinner
-              android:id="@+id/spinnerId"
-              style="@android:style/Widget.Material.Spinner.Underlined"
-              android:layout_width="wrap_content"
-              android:layout_height="40dp"
-              android:layout_gravity="start|top|end"
-              android:layout_marginStart="8dp"
-              android:layout_marginTop="8dp"
-              android:popupBackground="@color/colorPrimary"
-              android:popupElevation="0dp"
-              app:layout_constraintStart_toEndOf="@+id/textSelectIdLabel"
-              app:layout_constraintTop_toTopOf="parent" />
-
-          <androidx.cardview.widget.CardView
+          <androidx.constraintlayout.widget.ConstraintLayout
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginStart="8dp"
-              android:layout_marginTop="16dp"
-              android:layout_marginEnd="8dp"
-              app:cardBackgroundColor="#F7EFD7"
-              app:cardCornerRadius="8dp"
-              app:cardElevation="4dp"
-              app:cardMaxElevation="4dp"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toBottomOf="@+id/spinnerId">
+              android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:cardBackgroundColor="#F7EFD7"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                app:cardMaxElevation="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-              <TextView
-                  android:id="@+id/textOrderId"
+              <androidx.constraintlayout.widget.ConstraintLayout
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginStart="8dp"
-                  android:layout_marginTop="16dp"
-                  android:layout_marginEnd="16dp"
-                  android:fontFamily="@font/kaushan_script"
-                  android:hint="Order Id:  11234567890"
-                  android:textSize="18sp"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintStart_toStartOf="parent"
-                  app:layout_constraintTop_toTopOf="parent" />
+                  android:layout_height="match_parent">
 
-              <TextView
-                  android:id="@+id/textClientEmail"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="4dp"
-                  android:hint="Client:"
-                  android:textSize="18sp"
-                  app:layout_constraintEnd_toEndOf="@+id/textOrderId"
-                  app:layout_constraintStart_toStartOf="@+id/textOrderId"
-                  app:layout_constraintTop_toBottomOf="@+id/textOrderId" />
+                <TextView
+                    android:id="@+id/textOrderId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/kaushan_script"
+                    android:hint="Order Id:  11234567890"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-              <View
-                  android:layout_width="0dp"
-                  android:layout_height="3dp"
-                  android:layout_marginStart="4dp"
-                  android:layout_marginTop="4dp"
-                  android:layout_marginEnd="16dp"
-                  android:background="#63EF6C00"
-                  app:layout_constraintEnd_toEndOf="@+id/textClientEmail"
-                  app:layout_constraintStart_toStartOf="@+id/textClientEmail"
-                  app:layout_constraintTop_toBottomOf="@+id/textClientEmail" />
+                <TextView
+                    android:id="@+id/textClientEmail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:hint="Client:"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textOrderId"
+                    app:layout_constraintStart_toStartOf="@+id/textOrderId"
+                    app:layout_constraintTop_toBottomOf="@+id/textOrderId" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#63EF6C00"
+                    app:layout_constraintEnd_toEndOf="@+id/textClientEmail"
+                    app:layout_constraintStart_toStartOf="@+id/textClientEmail"
+                    app:layout_constraintTop_toBottomOf="@+id/textClientEmail" />
 
 
-              <!-- Vendor-->
-              <TextView
-                  android:id="@+id/textVendorLabel"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="16dp"
-                  android:fontFamily="@font/kaushan_script"
-                  android:hint="Vendor Information"
-                  android:textSize="18sp"
-                  app:layout_constraintEnd_toEndOf="@+id/textClientEmail"
-                  app:layout_constraintStart_toStartOf="@+id/textClientEmail"
-                  app:layout_constraintTop_toBottomOf="@+id/textClientEmail" />
+                <!-- Vendor-->
+                <TextView
+                    android:id="@+id/textVendorLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/kaushan_script"
+                    android:hint="Vendor Information"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textClientEmail"
+                    app:layout_constraintStart_toStartOf="@+id/textClientEmail"
+                    app:layout_constraintTop_toBottomOf="@+id/textClientEmail" />
 
-              <TextView
-                  android:id="@+id/textVendorName"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginStart="24dp"
-                  android:layout_marginTop="8dp"
-                  android:hint="Vendor Name"
-                  android:textSize="18sp"
-                  app:layout_constraintEnd_toEndOf="@+id/textVendorLabel"
-                  app:layout_constraintStart_toStartOf="@+id/textVendorLabel"
-                  app:layout_constraintTop_toBottomOf="@+id/textVendorLabel" />
+                <TextView
+                    android:id="@+id/textVendorName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:hint="Vendor Name"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textVendorLabel"
+                    app:layout_constraintStart_toStartOf="@+id/textVendorLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/textVendorLabel" />
 
-              <TextView
-                  android:id="@+id/textVendorPhone"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="8dp"
-                  android:hint="Phone:"
-                  android:textSize="18sp"
-                  app:layout_constraintEnd_toEndOf="@+id/textVendorName"
-                  app:layout_constraintStart_toStartOf="@+id/textVendorName"
-                  app:layout_constraintTop_toBottomOf="@+id/textVendorName" />
+                <TextView
+                    android:id="@+id/textVendorPhone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="Phone:"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textVendorName"
+                    app:layout_constraintStart_toStartOf="@+id/textVendorName"
+                    app:layout_constraintTop_toBottomOf="@+id/textVendorName" />
 
-              <TextView
-                  android:id="@+id/textVendorEmail"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="8dp"
-                  android:hint="vendor email:"
-                  android:textSize="18sp"
-                  app:layout_constraintEnd_toEndOf="@+id/textVendorPhone"
-                  app:layout_constraintStart_toStartOf="@+id/textVendorPhone"
-                  app:layout_constraintTop_toBottomOf="@+id/textVendorPhone" />
+                <TextView
+                    android:id="@+id/textVendorEmail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="vendor email:"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textVendorPhone"
+                    app:layout_constraintStart_toStartOf="@+id/textVendorPhone"
+                    app:layout_constraintTop_toBottomOf="@+id/textVendorPhone" />
 
-              <View
-                  android:layout_width="0dp"
-                  android:layout_height="3dp"
-                  android:layout_marginStart="4dp"
-                  android:layout_marginTop="4dp"
-                  android:layout_marginEnd="16dp"
-                  android:background="#63EF6C00"
-                  app:layout_constraintEnd_toEndOf="@+id/textClientEmail"
-                  app:layout_constraintStart_toStartOf="@+id/textClientEmail"
-                  app:layout_constraintTop_toBottomOf="@+id/textVendorEmail" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#63EF6C00"
+                    app:layout_constraintEnd_toEndOf="@+id/textClientEmail"
+                    app:layout_constraintStart_toStartOf="@+id/textClientEmail"
+                    app:layout_constraintTop_toBottomOf="@+id/textVendorEmail" />
 
-              <!-- Shipment-->
-              <TextView
-                  android:id="@+id/textShipLabel"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="20dp"
-                  android:fontFamily="@font/kaushan_script"
-                  android:hint="Shipment Details"
-                  android:textSize="18sp"
-                  app:layout_constraintEnd_toEndOf="@+id/textClientEmail"
-                  app:layout_constraintStart_toStartOf="@+id/textClientEmail"
-                  app:layout_constraintTop_toBottomOf="@+id/textVendorEmail" />
+                <!-- Shipment-->
+                <TextView
+                    android:id="@+id/textShipLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/kaushan_script"
+                    android:hint="Shipment Details"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textClientEmail"
+                    app:layout_constraintStart_toStartOf="@+id/textClientEmail"
+                    app:layout_constraintTop_toBottomOf="@+id/textVendorEmail" />
 
-              <TextView
-                  android:id="@+id/textPrice"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginStart="24dp"
-                  android:layout_marginTop="4dp"
-                  android:hint="Price:"
-                  android:textSize="18sp"
-                  app:layout_constraintEnd_toEndOf="@+id/textShipLabel"
-                  app:layout_constraintStart_toStartOf="@+id/textShipLabel"
-                  app:layout_constraintTop_toBottomOf="@+id/textShipLabel" />
+                <TextView
+                    android:id="@+id/textPrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="Price:"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textShipLabel"
+                    app:layout_constraintStart_toStartOf="@+id/textShipLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/textShipLabel" />
 
-              <TextView
-                  android:id="@+id/textWeight"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="8dp"
-                  android:hint="Weight:"
-                  android:textSize="18sp"
-                  app:layout_constraintEnd_toEndOf="@+id/textPrice"
-                  app:layout_constraintStart_toStartOf="@+id/textPrice"
-                  app:layout_constraintTop_toBottomOf="@+id/textPrice" />
+                <TextView
+                    android:id="@+id/textWeight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="Weight:"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textPrice"
+                    app:layout_constraintStart_toStartOf="@+id/textPrice"
+                    app:layout_constraintTop_toBottomOf="@+id/textPrice" />
 
-              <!-- Origen-->
-              <TextView
-                  android:id="@+id/textOriginLabel"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="16dp"
-                  android:fontFamily="@font/kaushan_script"
-                  android:hint="Origen"
-                  android:textSize="18sp"
-                  app:layout_constraintEnd_toEndOf="@+id/textWeight"
-                  app:layout_constraintStart_toStartOf="@+id/textWeight"
-                  app:layout_constraintTop_toBottomOf="@+id/textWeight" />
+                <!-- Origen-->
+                <TextView
+                    android:id="@+id/textOriginLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/kaushan_script"
+                    android:hint="Origen"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textWeight"
+                    app:layout_constraintStart_toStartOf="@+id/textWeight"
+                    app:layout_constraintTop_toBottomOf="@+id/textWeight" />
 
-              <TextView
-                  android:id="@+id/textOrigenDate"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginStart="24dp"
-                  android:layout_marginTop="4dp"
-                  android:hint="Shipped date:"
-                  android:textSize="16sp"
-                  app:layout_constraintEnd_toEndOf="@+id/textOriginLabel"
-                  app:layout_constraintStart_toStartOf="@+id/textOriginLabel"
-                  app:layout_constraintTop_toBottomOf="@+id/textOriginLabel" />
+                <TextView
+                    android:id="@+id/textOrigenDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="Shipped date:"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textOriginLabel"
+                    app:layout_constraintStart_toStartOf="@+id/textOriginLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/textOriginLabel" />
 
-              <TextView
-                  android:id="@+id/textOrigenMobile"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="8dp"
-                  android:hint="Mobile:"
-                  android:textSize="16sp"
-                  app:layout_constraintEnd_toEndOf="@+id/textOrigenDate"
-                  app:layout_constraintStart_toStartOf="@+id/textOrigenDate"
-                  app:layout_constraintTop_toBottomOf="@+id/textOrigenDate" />
+                <TextView
+                    android:id="@+id/textOrigenMobile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="Mobile:"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textOrigenDate"
+                    app:layout_constraintStart_toStartOf="@+id/textOrigenDate"
+                    app:layout_constraintTop_toBottomOf="@+id/textOrigenDate" />
 
-              <TextView
-                  android:id="@+id/textOrigenAddress"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="8dp"
-                  android:hint="Address:"
-                  android:textSize="16sp"
-                  app:layout_constraintEnd_toEndOf="@+id/textOrigenMobile"
-                  app:layout_constraintStart_toStartOf="@+id/textOrigenMobile"
-                  app:layout_constraintTop_toBottomOf="@+id/textOrigenMobile" />
+                <TextView
+                    android:id="@+id/textOrigenAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="Address:"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textOrigenMobile"
+                    app:layout_constraintStart_toStartOf="@+id/textOrigenMobile"
+                    app:layout_constraintTop_toBottomOf="@+id/textOrigenMobile" />
 
-              <!-- Destination-->
-              <TextView
-                  android:id="@+id/textDestinationLabel"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="16dp"
-                  android:fontFamily="@font/kaushan_script"
-                  android:hint="Destination"
-                  android:textSize="18sp"
-                  app:layout_constraintEnd_toEndOf="@+id/textVendorEmail"
-                  app:layout_constraintStart_toStartOf="@+id/textVendorEmail"
-                  app:layout_constraintTop_toBottomOf="@+id/textOrigenAddress" />
+                <!-- Destination-->
+                <TextView
+                    android:id="@+id/textDestinationLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/kaushan_script"
+                    android:hint="Destination"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textVendorEmail"
+                    app:layout_constraintStart_toStartOf="@+id/textVendorEmail"
+                    app:layout_constraintTop_toBottomOf="@+id/textOrigenAddress" />
 
-              <TextView
-                  android:id="@+id/textPickDate"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginStart="24dp"
-                  android:layout_marginTop="4dp"
-                  android:hint="Pick up date:"
-                  android:textSize="16sp"
-                  app:layout_constraintEnd_toEndOf="@+id/textDestinationLabel"
-                  app:layout_constraintStart_toStartOf="@+id/textDestinationLabel"
-                  app:layout_constraintTop_toBottomOf="@+id/textDestinationLabel" />
+                <TextView
+                    android:id="@+id/textPickDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="Pick up date:"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textDestinationLabel"
+                    app:layout_constraintStart_toStartOf="@+id/textDestinationLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/textDestinationLabel" />
 
-              <TextView
-                  android:id="@+id/textDestinationMobile"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="8dp"
-                  android:layout_marginEnd="50dp"
-                  android:hint="Mobile:"
-                  android:textSize="16sp"
-                  app:layout_constraintEnd_toEndOf="@+id/textPickDate"
-                  app:layout_constraintStart_toStartOf="@+id/textPickDate"
-                  app:layout_constraintTop_toBottomOf="@+id/textPickDate" />
+                <TextView
+                    android:id="@+id/textDestinationMobile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="50dp"
+                    android:hint="Mobile:"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textPickDate"
+                    app:layout_constraintStart_toStartOf="@+id/textPickDate"
+                    app:layout_constraintTop_toBottomOf="@+id/textPickDate" />
 
-              <TextView
-                  android:id="@+id/textDestinationAddress"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="8dp"
-                  android:layout_marginBottom="8dp"
-                  android:hint="Address:"
-                  android:textSize="16sp"
-                  app:layout_constraintBottom_toBottomOf="parent"
-                  app:layout_constraintEnd_toEndOf="@+id/textDestinationMobile"
-                  app:layout_constraintStart_toStartOf="@+id/textDestinationMobile"
-                  app:layout_constraintTop_toBottomOf="@+id/textDestinationMobile" />
+                <TextView
+                    android:id="@+id/textDestinationAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:hint="Address:"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textDestinationMobile"
+                    app:layout_constraintStart_toStartOf="@+id/textDestinationMobile"
+                    app:layout_constraintTop_toBottomOf="@+id/textDestinationMobile" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-          </androidx.cardview.widget.CardView>
+              </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-      </LinearLayout>
-    </ScrollView>
+          </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+      </ScrollView>
+    </LinearLayout>
 
   </FrameLayout>
 </layout>
