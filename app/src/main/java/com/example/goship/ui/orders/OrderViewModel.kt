@@ -50,7 +50,7 @@ class OrderViewModel : ViewModel() {
                     for (i in response.body()?.ordersPart?.indices!!){
                         val order =
                             OrdersFromAPI(
-                                "<b>Order Id:</b>  ${response.body()?.ordersPart?.get(i)?.id}",
+                                "<b>Order Id:</b> ${response.body()?.ordersPart?.get(i)?.id}",
                                 "<b>${response.body()?.ordersPart?.get(i)?.p_date}</b>",
                                 "<b>Client email:</b> ${response.body()?.ordersPart?.get(i)?.u_email}",
                                 "<b>Price: </b>  $${response.body()?.ordersPart?.get(i)?.price}" )

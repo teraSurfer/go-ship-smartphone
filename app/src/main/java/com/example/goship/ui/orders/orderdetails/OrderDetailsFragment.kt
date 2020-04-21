@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter
 import androidx.core.text.HtmlCompat
 
 
+const val KEY_ORDER_POSITION = "ORDER_ID_POSITION"
 
 class OrderDetailsFragment : Fragment() {
 
@@ -163,10 +164,15 @@ class OrderDetailsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         orderDetailsViewModel = ViewModelProvider(this).get(OrderDetailsViewModel::class.java)
         // TODO: Use the ViewModel
-        orderPosition = OrderDetailsFragmentArgs.fromBundle(arguments!!).orderPosition
+        orderPosition = savedInstanceState?.getInt(KEY_ORDER_POSITION, 0) ?:  //Elvis operator return safeArg if savedInstanceState Null
+            OrderDetailsFragmentArgs.fromBundle(arguments!!).orderPosition
         ordersList = OrderDetailsFragmentArgs.fromBundle(arguments!!).ordersIDs
         orderDetailsViewModel.getVMOrderPosition(orderPosition)
         orderDetailsViewModel.getVMOrderIDs(ordersList)
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(KEY_ORDER_POSITION, orderPosition )
+    }
 }
