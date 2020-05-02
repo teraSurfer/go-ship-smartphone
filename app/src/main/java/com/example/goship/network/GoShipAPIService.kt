@@ -1,17 +1,14 @@
 package com.example.goship.network
 
 
+import com.example.goship.dataproperty.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import com.example.goship.dataproperty.DivisionProperty
 import retrofit2.http.Query
-import com.example.goship.dataproperty.LeastPriceProperty
-import com.example.goship.dataproperty.OrderSingle
-import com.example.goship.dataproperty.OrdersAll
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.http.Body
@@ -67,6 +64,46 @@ interface GetLeastPriceService {
 object LeastPriceAPI {
     val retrofitService : GetLeastPriceService by lazy {
         retrofit.create(GetLeastPriceService::class.java)
+    }
+}
+
+interface PincodeService {
+    @GET("/pincode") //realestate Retrofit appends the endpoint to the base URL
+    fun getProperties(@Query("pincode") pincode: String
+    ): Call<CityProperty>
+}
+
+object PincodeAPI {
+    val retrofitService : PincodeService by lazy {
+        retrofit.create(PincodeService::class.java)
+    }
+}
+
+
+interface EstimateService {
+    @GET("/estimate") //realestate Retrofit appends the endpoint to the base URL
+    fun getProperties(@Query("origin") source: String,
+                      @Query("destination") destination: String,
+                      @Query("weight") weight: Int
+    ): Call<EstimateProperty>
+}
+
+object EstimateAPI {
+    val retrofitService : EstimateService by lazy {
+        retrofit.create(EstimateService::class.java)
+    }
+}
+
+
+interface PlaceOrderService {
+    @POST("/placeorder") //realestate Retrofit appends the endpoint to the base URL
+    fun post(@Body request: RequestBody
+    ): Call<OrderSuccessProperty>
+}
+
+object PlaceOrderAPI {
+    val retrofitService : PlaceOrderService by lazy {
+        retrofit.create(PlaceOrderService::class.java)
     }
 }
 

@@ -34,4 +34,6 @@
     <!-- Orders -->
     <string name="menu_order">Orders</string>
     <string name="menu_order_details">Orders Details</string>
+    <string name="menu_customer_estimate">Estimate Price</string>
+    <string name="fragment_customer_estimate_price">Get Estimate</string>
 </resources>
