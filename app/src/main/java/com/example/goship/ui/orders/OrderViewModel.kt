@@ -1,31 +1,27 @@
 package com.example.goship.ui.orders
 
 import android.util.Log
-import androidx.core.text.HtmlCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.goship.dataproperty.*
-import com.example.goship.network.OrdersClientAPI
+import com.example.goship.network.ClientAllOrdersAPI
+import com.example.goship.network.VendorAllOrdersAPI
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class OrderViewModel : ViewModel() {
 
-    val ordersFromAPI = HashMap<Long, OrdersFromAPI>()
+    private val ordersFromAPI = HashMap<String, OrdersFromAPI>()
+    val vmListOrders = MutableLiveData<List<OrdersFromAPI>>()
     val failureResponse = MutableLiveData<String>()
+    val vmArraytId = MutableLiveData<Array<String>>()
 
-
-    private val _listOrders = MutableLiveData<List<OrdersFromAPI>>().apply {
-        value =  ordersFromAPI.values.toList()
-    }
-    val vmListOrders: MutableLiveData<List<OrdersFromAPI>> = _listOrders
-
-//DELETE
-//    private val _listOrders = MutableLiveData<List<OrdersFake>>().apply {
-//        value =  DataManager.customerOrders.values.toList()
-//    }
-//    val vmListOrders: LiveData<List<OrdersFake>> = _listOrders
+    //private val _listOrders = MutableLiveData<List<OrdersFake>>().apply {
+    //   value =  DataManager.customerOrders.values.toList()
+    //}
+    //val vmListOrders: LiveData<List<OrdersFake>> = _listOrders
 
 
     fun getVMOrderAdapterPosition(  position: Int) {
@@ -36,59 +32,72 @@ class OrderViewModel : ViewModel() {
 
     init {
         when (userType) {
-            1 -> getCustomersOrdersProperties()
-            2 -> getVendorsOrdersProperties()
-            else -> { // Note the block
-                print("Unauthorized User")
-            }
+            1 -> getAllCustomerOrdersProperties()
+            2 -> getAllVendorOrdersProperties()
+            else -> failureResponse.value = "Unauthorized User"
         }
     }
 
-    private fun getVendorsOrdersProperties() {
-        OrdersClientAPI.retrofitService.getProperties( q_email!!).enqueue(
-            object: Callback<OrdersProperty> {
-                override fun onFailure(call: Call<OrdersProperty>, t: Throwable ) {
+    private fun getAllVendorOrdersProperties() {
+        VendorAllOrdersAPI.retrofitService.getProperties( q_email).enqueue(
+            object: Callback<OrdersAll> {
+                override fun onFailure(call: Call<OrdersAll>, t: Throwable ) {
                     //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     failureResponse.value = "Failure: " + t.message
                 }
-
-                override fun onResponse(call: Call<OrdersProperty>, response: Response<OrdersProperty>) {
+                override fun onResponse(call: Call<OrdersAll>, response: Response<OrdersAll>) {
                     //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     for (i in response.body()?.ordersPart?.indices!!){
-                        var order =
+                        val order =
                             OrdersFromAPI(
-                                "<b>Order Id:</b>  ${response.body()?.ordersPart?.get(i)?.ID}",
-                                "<b>${response.body()?.ordersPart?.get(i)?.P_Date}</b>",
-                                "<b>Client email:</b> ${response.body()?.ordersPart?.get(i)?.U_Email}",
-                                "<b>Price: </b>  $${response.body()?.ordersPart?.get(i)?.Price}" )
-                        ordersFromAPI.set(response.body()?.ordersPart?.get(i)?.ID!!, order)    //Add to the HashMap in ordered by id
+                                "<b>Order Id:</b> ${response.body()?.ordersPart?.get(i)?.id}",
+                                "<b>${response.body()?.ordersPart?.get(i)?.p_date}</b>",
+                                "<b>Client email:</b> ${response.body()?.ordersPart?.get(i)?.u_email}",
+                                "<b>Price: </b>  $${response.body()?.ordersPart?.get(i)?.price}" )
+                        ordersFromAPI.set(response.body()?.ordersPart?.get(i)?.id!!.toString(), order)    //Add to the HashMap in ordered by id
                     }
+                    //Convert hasMap to an ArrayList
+                    val idArraylist =  ArrayList(ordersFromAPI.keys)
+                    //Convert ArrayList to an Array
+                    //val myArray = arrayOfNulls<Long>(myArraylist.size)
+                    val idArray = Array(idArraylist.size){" "}
+                    idArraylist.toArray(idArray)
+                    //send LiveData to the View
+                    vmArraytId.value = idArray.copyOf()
                     vmListOrders.value = ordersFromAPI.values.toList()
                 }
             }
         )
     }
 
-    private fun getCustomersOrdersProperties() {
-        OrdersClientAPI.retrofitService.getProperties( q_email!!).enqueue(
-            object: Callback<OrdersProperty> {
-                override fun onFailure(call: Call<OrdersProperty>, t: Throwable ) {
+    private fun getAllCustomerOrdersProperties() {
+        ClientAllOrdersAPI.retrofitService.getProperties( q_email).enqueue(
+            object: Callback<OrdersAll> {
+                override fun onFailure(call: Call<OrdersAll>, t: Throwable ) {
                     //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     failureResponse.value = "Failure: " + t.message
                 }
-
-                override fun onResponse(call: Call<OrdersProperty>, response: Response<OrdersProperty>) {
+                override fun onResponse(call: Call<OrdersAll>, response: Response<OrdersAll>) {
                     //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     for (i in response.body()?.ordersPart?.indices!!){
-                        var order =
+                        val order =
                             OrdersFromAPI(
-                                "<b>Order Id:</b>  ${response.body()?.ordersPart?.get(i)?.ID}",
-                                "<b>${response.body()?.ordersPart?.get(i)?.P_Date}</b>",
-                                "<b>Vendor name:</b> ${response.body()?.ordersPart?.get(i)?.V_Name}",
-                                "<b>Phone: </b>  ${response.body()?.ordersPart?.get(i)?.V_Mobile}" )
-                        ordersFromAPI.set(response.body()?.ordersPart?.get(i)?.ID!!, order)    //Add to the HashMap in ordered by id
+                                "<b>Order Id:</b>  ${response.body()?.ordersPart?.get(i)?.id}",
+                                "<b>${response.body()?.ordersPart?.get(i)?.p_date}</b>",
+                                "<b>Vendor name:</b> ${response.body()?.ordersPart?.get(i)?.v_name}",
+                                "<b>Phone: </b>  ${response.body()?.ordersPart?.get(i)?.v_mobile}" )
+                        ordersFromAPI.set(response.body()?.ordersPart?.get(i)?.id!!.toString(), order)    //Add to the HashMap in ordered by id
                     }
+                    //Convert hasMap to an ArrayList
+                    val idArraylist =  ArrayList(ordersFromAPI.keys)
+                    //Convert ArrayList to an Array
+                    //val myArray = arrayOfNulls<Long>(myArraylist.size)
+                    val idArray = Array(idArraylist.size){" "}
+                    idArraylist.toArray(idArray)
+                    //send LiveData to the View
+                    vmArraytId.value = idArray.copyOf()
                     vmListOrders.value = ordersFromAPI.values.toList()
+
                 }
             }
         )

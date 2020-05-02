@@ -44,124 +44,26 @@ object DataManager {
         customerOrders.set(order.id, order)
     }
 }
-//commits:
-//  "Add navigation with safeArgs from Orders to Orders details"
-//  "Add vendor and customer views in same recycler and add  API network functionality"
 
-//{
-//    "orders": [{
-//    "O_Address": "Pune",
-//    "Weight": 65,
-//    "V_Email": "amit.vijapure@sjsu.edu",
-//    "Origin": 411057,
-//    "Destination": 431605,
-//    "D_Mobile": 5554343453,
-//    "D_Address": "Mumbai",
-//    "O_Date": "2020-04-18 08:21:17.004299",
-//    "Current_Status": "Accepted",
-//    "O_Mobile": 4646432323,
-//    "Price": 390,
-//    "P_Date": "10/10/2019",
-//    "ID": 1587198076923,
-//    "U_Email": "amit.vijapure@sjsu.edu"
-//}, {
-//    "O_Address": "Delhi",
-//    "Weight": 65,
-//    "V_Email": "amit.vijapure@sjsu.edu",
-//    "Origin": 431605,
-//    "Destination": 431605,
-//    "D_Mobile": 5554343453,
-//    "D_Address": "Mumbai",
-//    "O_Date": "2020-04-18 08:22:28.184184",
-//    "Current_Status": "Accepted",
-//    "O_Mobile": 4646432323,
-//    "Price": 390,
-//    "P_Date": "10/10/2019",
-//    "ID": 1587198148109,
-//    "U_Email": "amit.vijapure@sjsu.edu"
-//}]
-//}
-//
-//orders:
-//get:
-//summary: To get list of orders
-//parameters:
-//- in: query
-//name: email
-//required: true
-//schema:
-//type: object
-//properties:
-//    v_email:
-//type: string
-//u_email:
-//type: string
-//oneOf:
-//- required: [u_email]
-//- required: [v_email]
-//
-//description: Email of user or vendor
-//
-//
-//responses:
-//'200':
-//description: Returns list of orders
-//content:
-//application/json:
-//schema:
-//type: array
-//items:
-//type: object
-//properties:
-//    id:
-//type: integer
-//u_email:
-//type: string
-//
-//origin:
-//type: integer
-//destination:
-//type: integer
-//o_address:
-//type: string
-//d_address:
-//type: string
-//price:
-//type: integer
-//v_email:
-//type: string
-//v_name:
-//type: string
-//v_mobile:
-//type: integer
-//weight:
-//type: integer
-//o_mobile:
-//type: integer
-//d_mobile:
-//type: integer
-//o_date:
-//type: string
-//format: date-time
-//p_date:
-//type: string
-//format: date
-//status:
-//type: string
-//
-//required:
-//- id
-//- origin
-//- destination
-//- o_address
-//- d_address
-//- price
-//- v_email
-//- v_name
-//- v_mobile
-//- weight
-//- o_mobile
-//- d_mobile
-//- o_date
-//- p_date
-//- status
+
+/************JSOP Example*********/
+//https://api.cmpe282.terasurfer.com/orders?v_email=amit.vijapure@sjsu.edu
+//"v_mobile": 5034343434,
+//"o_address": "Pune",
+//"weight": 65,
+//"v_email": "amit.vijapure@sjsu.edu",
+//"origin": 411057,
+//"destination": 411057,
+//"d_mobile": 5554343453,
+//"d_address": "Banglore",
+//"o_date": "2020-04-19 19:06:21.734307",
+//"current_status": "Accepted",
+//"o_mobile": 4646432323,
+//"v_name": "Amit",
+//"price": 390,
+//"p_date": "10/10/2019",
+//"id": 1587323181637,
+//"u_email": "amit.vijapure@sjsu.edu"
+
+
+

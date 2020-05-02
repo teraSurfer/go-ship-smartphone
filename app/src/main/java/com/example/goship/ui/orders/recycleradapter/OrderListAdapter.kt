@@ -11,7 +11,7 @@ import com.example.goship.ui.orders.OrderViewModel
 
 
 //Adapter recycler as part of the Orders fragment
-class OrderListAdapter(private val list: List<OrdersFromAPI>, private var orderViewModel: OrderViewModel)
+ class OrderListAdapter(private val list: List<OrdersFromAPI>, private var orderViewModel: OrderViewModel,  private var ordersIDs: Array<String>)
     : RecyclerView.Adapter<OrderItemHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderItemHolder {
@@ -28,7 +28,7 @@ class OrderListAdapter(private val list: List<OrdersFromAPI>, private var orderV
         holderOrder.itemView.setOnClickListener {
             val position = holderOrder.adapterPosition  //return to save position in OrderViewModel
             orderViewModel.getVMOrderAdapterPosition(position)
-            val action  = OrderFragmentDirections.actionNavOrderToNavOrderDetails(orderPosition = position)
+            val action  = OrderFragmentDirections.actionNavOrderToNavOrderDetails(orderPosition = position, ordersIDs = ordersIDs  )
             it.findNavController().navigate(action)
             //Navigation.findNavController(view).navigate(R.id.action_nav_order_to_nav_orderDetails)
         }

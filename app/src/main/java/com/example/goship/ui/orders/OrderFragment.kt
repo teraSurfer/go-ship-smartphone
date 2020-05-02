@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.goship.R
@@ -20,9 +21,9 @@ class OrderFragment : Fragment() {
         fun newInstance() = OrderFragment()
     }
 
-
     private lateinit var orderViewModel: OrderViewModel
     private lateinit var binding: FragmentOrderBinding
+    private lateinit var ordersId: Array<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,17 +36,28 @@ class OrderFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentOrderBinding>(inflater,
             R.layout.fragment_order, container, false)
 
+
+        orderViewModel.vmArraytId.observe(viewLifecycleOwner, Observer {
+            ordersId = it.copyOf()
+        })
+
         orderViewModel.vmListOrders.observe(viewLifecycleOwner, Observer {
             binding.ordersCustomerList.apply {
                 // set a LinearLayoutManager to handle Android
                 // RecyclerView behavior
                 layoutManager = activity?.let { it1 -> LinearLayoutManager(it1) }
                 // set the custom adapter to the RecyclerView
-                adapter = OrderListAdapter(it, orderViewModel)
+                adapter = OrderListAdapter(it, orderViewModel, ordersId)
             }
         })
 
-        return binding.root
+        orderViewModel.failureResponse.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(getContext(),
+                "Network Error: ${it}", Toast.LENGTH_LONG).show()
+        })
+
+
+        return  binding.root
     }
 
 
