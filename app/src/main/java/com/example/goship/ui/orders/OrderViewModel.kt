@@ -1,6 +1,7 @@
 package com.example.goship.ui.orders
 
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,6 +22,7 @@ class OrderViewModel : ViewModel() {
     val vmArraytId = MutableLiveData<Array<String>>()
     val q_email = MutableLiveData<String>()
     val userType = MutableLiveData<Int>()
+    val vmNoDAta = MutableLiveData<Int>()
 
     //private val _listOrders = MutableLiveData<List<OrdersFake>>().apply {
     //   value =  DataManager.customerOrders.values.toList()
@@ -33,14 +35,10 @@ class OrderViewModel : ViewModel() {
       val  myOrderPosition = position
         Log.i("OrderListAdapter", position.toString())
     }
-//
-//    init {
-//        when (userType.value) {
-//            1 -> getAllCustomerOrdersProperties()
-//            2 -> getAllVendorOrdersProperties()
-//            else -> failureResponse.value = "Unauthorized User"
-//        }
-//    }
+
+    init {
+        vmNoDAta.value = View.INVISIBLE
+    }
 
     fun getAllVendorOrdersProperties() {
         VendorAllOrdersAPI.retrofitService.getProperties( q_email.value!!).enqueue(
@@ -48,6 +46,7 @@ class OrderViewModel : ViewModel() {
                 override fun onFailure(call: Call<OrdersAll>, t: Throwable ) {
                     //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     failureResponse.value = "Failure: " + t.message
+                    vmNoDAta.value = View.VISIBLE
                 }
                 override fun onResponse(call: Call<OrdersAll>, response: Response<OrdersAll>) {
                     //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -69,6 +68,11 @@ class OrderViewModel : ViewModel() {
                     //send LiveData to the View
                     vmArraytId.value = idArray.copyOf()
                     vmListOrders.value = ordersFromAPI.values.toList()
+                    if (idArray.size == 0) {
+                        vmNoDAta.value = View.VISIBLE
+                    } else {
+                        vmNoDAta.value = View.INVISIBLE
+                    }
                 }
             }
         )
@@ -80,6 +84,7 @@ class OrderViewModel : ViewModel() {
                 override fun onFailure(call: Call<OrdersAll>, t: Throwable ) {
                     //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     failureResponse.value = "Failure: " + t.message
+                    vmNoDAta.value = View.VISIBLE
                 }
                 override fun onResponse(call: Call<OrdersAll>, response: Response<OrdersAll>) {
                     //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -101,7 +106,11 @@ class OrderViewModel : ViewModel() {
                     //send LiveData to the View
                     vmArraytId.value = idArray.copyOf()
                     vmListOrders.value = ordersFromAPI.values.toList()
-
+                    if (idArray.size == 0) {
+                        vmNoDAta.value = View.VISIBLE
+                    } else {
+                        vmNoDAta.value = View.INVISIBLE
+                    }
                 }
             }
         )
