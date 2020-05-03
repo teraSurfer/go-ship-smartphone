@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 
 import com.example.goship.R
 import com.example.goship.databinding.FragmentUpdateLeastPriceBinding
 import com.example.goship.network.UpdateLeastPriceAPI
+import com.example.goship.ui.user.LoginViewModel
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -39,6 +41,7 @@ class UpdateLeastPriceFragment : Fragment() {
         var destination = UpdateLeastPriceFragmentArgs.fromBundle(arguments!!).destinationdivision
 
         updateLeastPriceViewModel = ViewModelProviders.of(this).get(UpdateLeastPriceViewModel::class.java)
+        val loginViewModel : LoginViewModel by activityViewModels()
 
         binding.textView4.text = source
         binding.textView5.text = destination
@@ -61,7 +64,7 @@ class UpdateLeastPriceFragment : Fragment() {
                 toast.show()
             }
             else{
-                updateLeastPrice(source, destination, updateLeastPriceViewModel.leastprice.value.toString(), "a@gmail.com")
+                updateLeastPrice(source, destination, updateLeastPriceViewModel.leastprice.value.toString(), loginViewModel.email.value.toString())
             }
         }
         updateLeastPriceViewModel.getLeastPrice(source, destination)

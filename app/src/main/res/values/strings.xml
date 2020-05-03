@@ -18,6 +18,24 @@
     <!-- Common Strings -->
     <string name="shipping_image_description">Shipping Image</string>
 
+    <!-- Login & Register -->
+    <string name="button_login">Login</string>
+    <string name="login_image_description">Login Image</string>
+    <string name="radio_text_login_as_customer">Login as Customer</string>
+    <string name="radio_text_login_as_vendor">Login as Vendor</string>
+    <string name="radio_text_register_as_customer">Register as Customer</string>
+    <string name="radio_text_register_as_vendor">Register as Vendor</string>
+    <string name="button_register_here">New User Registration</string>
+    <string name="text_email_hint">Email</string>
+    <string name="text_password_hint">Password</string>
+    <string name="text_confirm_password_hint">Confirm Password</string>
+    <string name="button_register">Register</string>
+    <string name="text_first_name_hint">First Name</string>
+    <string name="text_last_name_hint">Last Name</string>
+    <string name="text_mobile_hint">Mobile</string>
+    <string name="error_failed_to_register">Registration Failed!!</string>
+    <string name="success_user_register">Registration Successful</string>
+
     <!-- Vendor Price -->
     <string name="menu_vendor_price">Price</string>
     <string name="fragment_label_vendor_get_price">Get Shipping Price</string>

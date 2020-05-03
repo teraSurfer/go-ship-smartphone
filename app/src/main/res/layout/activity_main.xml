@@ -24,13 +24,13 @@
 <!--        app:menu="@menu/vendor_drawer" />-->
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view_customer"
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         android:background="#FFE0B2"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/customer_drawer" />
+        app:menu="@menu/drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

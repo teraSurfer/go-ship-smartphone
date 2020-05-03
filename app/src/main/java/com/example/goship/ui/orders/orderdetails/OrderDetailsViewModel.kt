@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.goship.dataproperty.OrderSingle
-import com.example.goship.dataproperty.userType
 import com.example.goship.network.OrderAPI
 import retrofit2.Call
 import retrofit2.Callback
@@ -72,11 +71,7 @@ class OrderDetailsViewModel : ViewModel() {
     fun getVMOrderSelected(  orderId: Any) {
         orderSelected = orderId.toString()
         vmTextOrderId.value = "<b>Order Id: </b><u> ${orderId.toString()}</u>"
-        when (userType) {
-            1 -> getCustomerOrderProperties()
-            2 -> getCustomerOrderProperties()
-            else -> failureResponse.value = "Unauthorized User"
-        }
+        getOrderProperties()
         Log.i("OrderDetailsViewModel", orderId.toString())
     }
 
@@ -85,7 +80,7 @@ class OrderDetailsViewModel : ViewModel() {
         Log.i("OrderDetailsViewModel", "Array of UDs")
     }
 
-    private fun getCustomerOrderProperties() {
+    private fun getOrderProperties() {
         OrderAPI.retrofitService.getProperties( orderSelected).enqueue(
             object: Callback<OrderSingle> {
                 override fun onFailure(call: Call<OrderSingle>, t: Throwable ) {

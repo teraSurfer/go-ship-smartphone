@@ -1,11 +1,13 @@
 package com.example.goship.ui.orders
 
 import android.util.Log
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.goship.dataproperty.*
 import com.example.goship.network.ClientAllOrdersAPI
 import com.example.goship.network.VendorAllOrdersAPI
+import com.example.goship.ui.user.LoginViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,6 +19,8 @@ class OrderViewModel : ViewModel() {
     val vmListOrders = MutableLiveData<List<OrdersFromAPI>>()
     val failureResponse = MutableLiveData<String>()
     val vmArraytId = MutableLiveData<Array<String>>()
+    val q_email = MutableLiveData<String>()
+    val userType = MutableLiveData<Int>()
 
     //private val _listOrders = MutableLiveData<List<OrdersFake>>().apply {
     //   value =  DataManager.customerOrders.values.toList()
@@ -29,17 +33,17 @@ class OrderViewModel : ViewModel() {
       val  myOrderPosition = position
         Log.i("OrderListAdapter", position.toString())
     }
+//
+//    init {
+//        when (userType.value) {
+//            1 -> getAllCustomerOrdersProperties()
+//            2 -> getAllVendorOrdersProperties()
+//            else -> failureResponse.value = "Unauthorized User"
+//        }
+//    }
 
-    init {
-        when (userType) {
-            1 -> getAllCustomerOrdersProperties()
-            2 -> getAllVendorOrdersProperties()
-            else -> failureResponse.value = "Unauthorized User"
-        }
-    }
-
-    private fun getAllVendorOrdersProperties() {
-        VendorAllOrdersAPI.retrofitService.getProperties( q_email).enqueue(
+    fun getAllVendorOrdersProperties() {
+        VendorAllOrdersAPI.retrofitService.getProperties( q_email.value!!).enqueue(
             object: Callback<OrdersAll> {
                 override fun onFailure(call: Call<OrdersAll>, t: Throwable ) {
                     //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -70,8 +74,8 @@ class OrderViewModel : ViewModel() {
         )
     }
 
-    private fun getAllCustomerOrdersProperties() {
-        ClientAllOrdersAPI.retrofitService.getProperties( q_email).enqueue(
+    fun getAllCustomerOrdersProperties() {
+        ClientAllOrdersAPI.retrofitService.getProperties( q_email.value!!).enqueue(
             object: Callback<OrdersAll> {
                 override fun onFailure(call: Call<OrdersAll>, t: Throwable ) {
                     //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

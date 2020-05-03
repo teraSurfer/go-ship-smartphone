@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.goship.R
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.goship.databinding.FragmentOrderBinding
 import com.example.goship.ui.orders.recycleradapter.OrderListAdapter
+import com.example.goship.ui.user.LoginViewModel
 
 
 class OrderFragment : Fragment() {
@@ -30,12 +32,18 @@ class OrderFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         orderViewModel =
             ViewModelProvider(this).get(OrderViewModel::class.java)
+        val loginViewModel : LoginViewModel by activityViewModels()
+        orderViewModel.q_email.value = loginViewModel.email.value.toString()
+        if (loginViewModel.isCustomer.value!!){
+            orderViewModel.getAllCustomerOrdersProperties()
+        }else{
+            orderViewModel.getAllVendorOrdersProperties()
+        }
+
         binding = DataBindingUtil.inflate<FragmentOrderBinding>(inflater,
             R.layout.fragment_order, container, false)
-
 
         orderViewModel.vmArraytId.observe(viewLifecycleOwner, Observer {
             ordersId = it.copyOf()
@@ -55,7 +63,6 @@ class OrderFragment : Fragment() {
             Toast.makeText(getContext(),
                 "Network Error: ${it}", Toast.LENGTH_LONG).show()
         })
-
 
         return  binding.root
     }

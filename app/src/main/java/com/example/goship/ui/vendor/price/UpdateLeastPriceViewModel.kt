@@ -59,6 +59,9 @@ class UpdateLeastPriceViewModel : ViewModel() {
      }
 
     fun decreasePrice() {
-        leastprice.value = (leastprice.value)?.minus(1)
+        if  (leastprice.value != 0){
+            leastprice.value = (leastprice.value)?.minus(1)
+        }
+
      }
 }

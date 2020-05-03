@@ -33,6 +33,13 @@ class ShowLeastPriceFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        val menu  = activity?.nav_view?.menu;
+        if (menu != null) {
+            menu.findItem(R.id.nav_customer_estimate).isVisible = false
+            menu.findItem(R.id.nav_vendor_estimate).isVisible = true
+        }
+        activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)?.visibility  = View.VISIBLE
+
         val binding = DataBindingUtil.inflate<FragmentShowLeastPriceBinding>(inflater, R.layout.fragment_show_least_price,container,false)
 
         showLeastPriceViewModel = ViewModelProviders.of(this).get(ShowLeastPriceViewModel::class.java)
