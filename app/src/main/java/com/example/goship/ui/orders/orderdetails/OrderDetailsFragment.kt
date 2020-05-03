@@ -3,6 +3,7 @@ package com.example.goship.ui.orders.orderdetails
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -13,6 +14,8 @@ import com.example.goship.R
 import com.example.goship.databinding.FragmentOrderDetailsBinding
 import android.widget.ArrayAdapter
 import androidx.core.text.HtmlCompat
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 
 
 const val KEY_ORDER_POSITION = "ORDER_ID_POSITION"
@@ -156,7 +159,7 @@ class OrderDetailsFragment : Fragment() {
             binding.textDestinationAddress.setText(HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_COMPACT))
         })
 
-
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -174,5 +177,10 @@ class OrderDetailsFragment : Fragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(KEY_ORDER_POSITION, orderPosition )
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, Navigation.findNavController(view!!))
+                ||super.onOptionsItemSelected(item)
     }
 }
