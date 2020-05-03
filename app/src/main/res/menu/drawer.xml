@@ -5,6 +5,11 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_customer_estimate"
+            android:icon="@drawable/ic_menu_doller"
+            android:title="@string/menu_customer_estimate" />
+
+        <item
             android:id="@+id/nav_vendor_estimate"
             android:icon="@drawable/ic_menu_doller"
             android:title="@string/menu_vendor_price" />

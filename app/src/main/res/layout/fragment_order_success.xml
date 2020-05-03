@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            app:cardBackgroundColor="#F7EFD7"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardMaxElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/thank_you"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Thank you for your order. Vendor will get back to you."
+                    android:textSize="30sp"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/horizontal_line1"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="#63EF6C00"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/thank_you" />
+
+                <TextView
+                    android:id="@+id/textOrderId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:fontFamily="@font/kaushan_script"
+                    android:hint="Order Id: "
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/horizontal_line1" />
+
+
+                <View
+                    android:id="@+id/horizontal_line2"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    android:layout_margin="15dp"
+                    android:background="#63EF6C00"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textOrderId" />
+
+
+                <!-- Vendor-->
+                <TextView
+                    android:id="@+id/textVendorLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:fontFamily="@font/kaushan_script"
+                    android:hint="Vendor Information: "
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/horizontal_line2" />
+
+                <TextView
+                    android:id="@+id/textVendorName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:hint="Vendor Name: "
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textVendorLabel"
+                    app:layout_constraintStart_toStartOf="@+id/textVendorLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/textVendorLabel" />
+
+                <TextView
+                    android:id="@+id/textVendorPhone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="Vendor Phone: "
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textVendorName"
+                    app:layout_constraintStart_toStartOf="@+id/textVendorName"
+                    app:layout_constraintTop_toBottomOf="@+id/textVendorName" />
+
+                <TextView
+                    android:id="@+id/textVendorEmail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="Vendor Email: "
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textVendorPhone"
+                    app:layout_constraintStart_toStartOf="@+id/textVendorPhone"
+                    app:layout_constraintTop_toBottomOf="@+id/textVendorPhone" />
+
+                <View
+                    android:id="@+id/horizontal_line3"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    android:layout_margin="15dp"
+                    android:background="#63EF6C00"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textVendorEmail" />
+
+                <!-- Shipment-->
+                <TextView
+                    android:id="@+id/textShipLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:fontFamily="@font/kaushan_script"
+                    android:hint="Shipment Details: "
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/horizontal_line3" />
+
+                <TextView
+                    android:id="@+id/textPrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="Price: "
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textShipLabel"
+                    app:layout_constraintStart_toStartOf="@+id/textShipLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/textShipLabel" />
+
+                <TextView
+                    android:id="@+id/textWeight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="Weight: "
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textPrice"
+                    app:layout_constraintStart_toStartOf="@+id/textPrice"
+                    app:layout_constraintTop_toBottomOf="@+id/textPrice" />
+
+                <View
+                    android:id="@+id/horizontal_line4"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    android:layout_margin="15dp"
+                    android:background="#63EF6C00"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textWeight" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

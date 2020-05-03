@@ -1,11 +1,14 @@
 package com.example.goship.ui.orders
 
 import android.util.Log
+import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.goship.dataproperty.*
 import com.example.goship.network.ClientAllOrdersAPI
 import com.example.goship.network.VendorAllOrdersAPI
+import com.example.goship.ui.user.LoginViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,6 +20,9 @@ class OrderViewModel : ViewModel() {
     val vmListOrders = MutableLiveData<List<OrdersFromAPI>>()
     val failureResponse = MutableLiveData<String>()
     val vmArraytId = MutableLiveData<Array<String>>()
+    val q_email = MutableLiveData<String>()
+    val userType = MutableLiveData<Int>()
+    val vmNoDAta = MutableLiveData<Int>()
 
     //private val _listOrders = MutableLiveData<List<OrdersFake>>().apply {
     //   value =  DataManager.customerOrders.values.toList()
@@ -31,19 +37,16 @@ class OrderViewModel : ViewModel() {
     }
 
     init {
-        when (userType) {
-            1 -> getAllCustomerOrdersProperties()
-            2 -> getAllVendorOrdersProperties()
-            else -> failureResponse.value = "Unauthorized User"
-        }
+        vmNoDAta.value = View.INVISIBLE
     }
 
-    private fun getAllVendorOrdersProperties() {
-        VendorAllOrdersAPI.retrofitService.getProperties( q_email).enqueue(
+    fun getAllVendorOrdersProperties() {
+        VendorAllOrdersAPI.retrofitService.getProperties( q_email.value!!).enqueue(
             object: Callback<OrdersAll> {
                 override fun onFailure(call: Call<OrdersAll>, t: Throwable ) {
                     //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     failureResponse.value = "Failure: " + t.message
+                    vmNoDAta.value = View.VISIBLE
                 }
                 override fun onResponse(call: Call<OrdersAll>, response: Response<OrdersAll>) {
                     //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -65,17 +68,23 @@ class OrderViewModel : ViewModel() {
                     //send LiveData to the View
                     vmArraytId.value = idArray.copyOf()
                     vmListOrders.value = ordersFromAPI.values.toList()
+                    if (idArray.size == 0) {
+                        vmNoDAta.value = View.VISIBLE
+                    } else {
+                        vmNoDAta.value = View.INVISIBLE
+                    }
                 }
             }
         )
     }
 
-    private fun getAllCustomerOrdersProperties() {
-        ClientAllOrdersAPI.retrofitService.getProperties( q_email).enqueue(
+    fun getAllCustomerOrdersProperties() {
+        ClientAllOrdersAPI.retrofitService.getProperties( q_email.value!!).enqueue(
             object: Callback<OrdersAll> {
                 override fun onFailure(call: Call<OrdersAll>, t: Throwable ) {
                     //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     failureResponse.value = "Failure: " + t.message
+                    vmNoDAta.value = View.VISIBLE
                 }
                 override fun onResponse(call: Call<OrdersAll>, response: Response<OrdersAll>) {
                     //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -97,7 +106,11 @@ class OrderViewModel : ViewModel() {
                     //send LiveData to the View
                     vmArraytId.value = idArray.copyOf()
                     vmListOrders.value = ordersFromAPI.values.toList()
-
+                    if (idArray.size == 0) {
+                        vmNoDAta.value = View.VISIBLE
+                    } else {
+                        vmNoDAta.value = View.INVISIBLE
+                    }
                 }
             }
         )

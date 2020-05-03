@@ -5,16 +5,20 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 
 import com.example.goship.R
 import com.example.goship.databinding.FragmentShowLeastPriceBinding
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_show_least_price.view.*
 
 class ShowLeastPriceFragment : Fragment() {
@@ -30,6 +34,13 @@ class ShowLeastPriceFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val menu  = activity?.nav_view?.menu;
+        if (menu != null) {
+            menu.findItem(R.id.nav_customer_estimate).isVisible = false
+            menu.findItem(R.id.nav_vendor_estimate).isVisible = true
+        }
+        activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)?.visibility  = View.VISIBLE
 
         val binding = DataBindingUtil.inflate<FragmentShowLeastPriceBinding>(inflater, R.layout.fragment_show_least_price,container,false)
 
@@ -55,7 +66,7 @@ class ShowLeastPriceFragment : Fragment() {
             )
         }
 
-
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -63,6 +74,11 @@ class ShowLeastPriceFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         showLeastPriceViewModel = ViewModelProviders.of(this).get(ShowLeastPriceViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, Navigation.findNavController(view!!))
+                ||super.onOptionsItemSelected(item)
     }
 
 }

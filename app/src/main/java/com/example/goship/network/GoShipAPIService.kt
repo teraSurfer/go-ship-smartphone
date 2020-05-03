@@ -1,17 +1,14 @@
 package com.example.goship.network
 
 
+import com.example.goship.dataproperty.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import com.example.goship.dataproperty.DivisionProperty
 import retrofit2.http.Query
-import com.example.goship.dataproperty.LeastPriceProperty
-import com.example.goship.dataproperty.OrderSingle
-import com.example.goship.dataproperty.OrdersAll
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.http.Body
@@ -70,6 +67,70 @@ object LeastPriceAPI {
     }
 }
 
+interface AddCustomerService {
+    @POST("/adduser") //realestate Retrofit appends the endpoint to the base URL
+    fun post(@Body request: RequestBody
+    ): Call<ResponseBody>
+}
+
+object AddCustomerAPI {
+    val retrofitService : AddCustomerService by lazy {
+        retrofit.create(AddCustomerService::class.java)
+    }
+}
+
+interface AddVendorService {
+    @POST("/addvendor") //realestate Retrofit appends the endpoint to the base URL
+    fun post(@Body request: RequestBody
+    ): Call<ResponseBody>
+}
+
+object AddVendorAPI {
+    val retrofitService : AddVendorService by lazy {
+        retrofit.create(AddVendorService::class.java)
+    }
+}
+
+interface PincodeService {
+    @GET("/pincode") //realestate Retrofit appends the endpoint to the base URL
+    fun getProperties(@Query("pincode") pincode: String
+    ): Call<CityProperty>
+}
+
+object PincodeAPI {
+    val retrofitService : PincodeService by lazy {
+        retrofit.create(PincodeService::class.java)
+    }
+}
+
+
+interface EstimateService {
+    @GET("/estimate") //realestate Retrofit appends the endpoint to the base URL
+    fun getProperties(@Query("origin") source: String,
+                      @Query("destination") destination: String,
+                      @Query("weight") weight: Int
+    ): Call<EstimateProperty>
+}
+
+object EstimateAPI {
+    val retrofitService : EstimateService by lazy {
+        retrofit.create(EstimateService::class.java)
+    }
+}
+
+
+interface PlaceOrderService {
+    @POST("/placeorder") //realestate Retrofit appends the endpoint to the base URL
+    fun post(@Body request: RequestBody
+    ): Call<OrderSuccessProperty>
+}
+
+object PlaceOrderAPI {
+    val retrofitService : PlaceOrderService by lazy {
+        retrofit.create(PlaceOrderService::class.java)
+    }
+}
+
 interface UpdateLeastPriceService {
     @POST("/updateprice") //realestate Retrofit appends the endpoint to the base URL
     fun post(@Body request: RequestBody
@@ -97,7 +158,8 @@ interface GetClientAllOrdersService {
  * A public Api object that exposes the lazy-initialized Retrofit service
  * each time your app calls WeatherApi.retrofitService, it will get a singleton Retrofit object that implements ApiService.
  */
-object ClientAllOrdersAPI {
+object
+ClientAllOrdersAPI {
     val retrofitService : GetClientAllOrdersService by lazy {
         retrofit.create(GetClientAllOrdersService::class.java) }
     //The Retrofit create() method creates the Retrofit service itself with the ApiService interface.

@@ -3,13 +3,97 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/nav_vendor_estimate">
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.goship.ui.user.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_nav_vendor_estimate"
+            app:destination="@id/nav_vendor_estimate" />
+        <action
+            android:id="@+id/action_loginFragment_to_nav_customer_estimate"
+            app:destination="@id/nav_customer_estimate" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerUserFragment"
+            app:destination="@id/registerUserFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_customer_estimate"
+        android:name="com.example.goship.ui.customer.EstimatePriceFragment"
+        android:label="@string/fragment_customer_estimate_price"
+        tools:layout="@layout/fragment_estimate_price">
+
+        <action
+            android:id="@+id/action_nav_customer_estimate_to_nav_place_order"
+            app:destination="@id/nav_place_order" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/nav_place_order"
+        android:name="com.example.goship.ui.customer.PlaceOrderFragment"
+        android:label="Place Order"
+        tools:layout="@layout/fragment_place_order">
+
+
+        <argument
+            android:name="weight"
+            app:argType="integer" />
+        <argument
+            android:name="source"
+            app:argType="string" />
+        <argument
+            android:name="destination"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_nav_place_order_to_nav_order_success"
+            app:destination="@id/nav_order_success"
+            app:popUpTo="@id/nav_customer_estimate"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_order_success"
+        android:name="com.example.goship.ui.customer.OrderSuccessFragment"
+        android:label="Order Successful"
+        tools:layout="@layout/fragment_order_success">
+
+
+        <argument
+            android:name="id"
+            app:argType="long" />
+        <argument
+            android:name="price"
+            app:argType="integer" />
+        <argument
+            android:name="weight"
+            app:argType="integer" />
+        <argument
+            android:name="v_email"
+            app:argType="string" />
+        <argument
+            android:name="v_name"
+            app:argType="string" />
+        <argument
+            android:name="v_mobile"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_nav_order_success_to_nav_customer_estimate"
+            app:destination="@id/nav_customer_estimate"
+            app:popUpTo="@id/nav_customer_estimate"
+            app:popUpToInclusive="false" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/nav_vendor_estimate"
         android:name="com.example.goship.ui.vendor.price.ShowLeastPriceFragment"
         android:label="@string/fragment_label_vendor_get_price"
-        tools:layout="@layout/fragment_show_least_price" >
+        tools:layout="@layout/fragment_show_least_price">
         <action
             android:id="@+id/action_nav_vendor_estimate_to_updateLeastPriceFragment"
             app:destination="@id/updateLeastPriceFragment" />
@@ -32,45 +116,17 @@
         android:id="@+id/nav_order"
         android:name="com.example.goship.ui.orders.OrderFragment"
         android:label="@string/menu_order"
-        tools:layout="@layout/fragment_order" >
+        tools:layout="@layout/fragment_order">
         <action
             android:id="@+id/action_nav_order_to_nav_orderDetails"
             app:destination="@id/nav_orderDetails" />
     </fragment>
-
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.goship.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.goship.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
-
-    <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.example.goship.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
-
-    <fragment
-        android:id="@+id/nav_share"
-        android:name="com.example.goship.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
-
-    <fragment
-        android:id="@+id/nav_send"
-        android:name="com.example.goship.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
     <fragment
         android:id="@+id/nav_orderDetails"
         android:name="com.example.goship.ui.orders.orderdetails.OrderDetailsFragment"
-        android:label="@string/menu_order_details" >
+        android:label="@string/menu_order_details"
+        tools:layout="@layout/fragment_order_details">
+
         <argument
             android:name="orderPosition"
             app:argType="integer"
@@ -79,4 +135,9 @@
             android:name="ordersIDs"
             app:argType="string[]" />
     </fragment>
+    <fragment
+        android:id="@+id/registerUserFragment"
+        android:name="com.example.goship.ui.user.RegisterUserFragment"
+        android:label="RegisterUserFragment"
+        tools:layout="@layout/fragment_register_user"/>
 </navigation>

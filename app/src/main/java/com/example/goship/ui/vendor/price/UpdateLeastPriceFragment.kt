@@ -4,15 +4,20 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 
 import com.example.goship.R
 import com.example.goship.databinding.FragmentUpdateLeastPriceBinding
 import com.example.goship.network.UpdateLeastPriceAPI
+import com.example.goship.ui.user.LoginViewModel
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -61,21 +66,22 @@ class UpdateLeastPriceFragment : Fragment() {
                 toast.show()
             }
             else{
-                updateLeastPrice(source, destination, updateLeastPriceViewModel.leastprice.value.toString(), "a@gmail.com")
+                updateLeastPrice(source, destination)
             }
         }
         updateLeastPriceViewModel.getLeastPrice(source, destination)
 
+        setHasOptionsMenu(true)
         return binding.root
     }
 
-    private fun updateLeastPrice(source: String, destination: String, price: String, v_email: String) {
-
+    private fun updateLeastPrice(source: String, destination: String) {
+        val loginViewModel : LoginViewModel by activityViewModels()
         val json = JSONObject()
         json.put("sourcedivision", source)
         json.put("destinationdivision", destination)
-        json.put("price", price)
-        json.put("v_email", v_email)
+        json.put("price", updateLeastPriceViewModel.leastprice.value.toString())
+        json.put("v_email", loginViewModel.email.value.toString())
 
         val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json"), json.toString())
         UpdateLeastPriceAPI.retrofitService.post(
@@ -113,6 +119,11 @@ class UpdateLeastPriceFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         updateLeastPriceViewModel = ViewModelProviders.of(this).get(UpdateLeastPriceViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, Navigation.findNavController(view!!))
+                ||super.onOptionsItemSelected(item)
     }
 
 }

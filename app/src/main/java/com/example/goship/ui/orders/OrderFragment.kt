@@ -3,16 +3,21 @@ package com.example.goship.ui.orders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.goship.R
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.goship.databinding.FragmentOrderBinding
 import com.example.goship.ui.orders.recycleradapter.OrderListAdapter
+import com.example.goship.ui.user.LoginViewModel
 
 
 class OrderFragment : Fragment() {
@@ -30,12 +35,18 @@ class OrderFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         orderViewModel =
             ViewModelProvider(this).get(OrderViewModel::class.java)
+        val loginViewModel : LoginViewModel by activityViewModels()
+        orderViewModel.q_email.value = loginViewModel.email.value.toString()
+        if (loginViewModel.isCustomer.value!!){
+            orderViewModel.getAllCustomerOrdersProperties()
+        }else{
+            orderViewModel.getAllVendorOrdersProperties()
+        }
+
         binding = DataBindingUtil.inflate<FragmentOrderBinding>(inflater,
             R.layout.fragment_order, container, false)
-
 
         orderViewModel.vmArraytId.observe(viewLifecycleOwner, Observer {
             ordersId = it.copyOf()
@@ -56,6 +67,12 @@ class OrderFragment : Fragment() {
                 "Network Error: ${it}", Toast.LENGTH_LONG).show()
         })
 
+        orderViewModel.vmNoDAta.observe(viewLifecycleOwner, Observer {
+            binding.textNoData.setText("No Order Placed")
+            binding.textNoData.visibility = it
+        })
+
+        setHasOptionsMenu(true)
 
         return  binding.root
     }
@@ -65,6 +82,11 @@ class OrderFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         orderViewModel = ViewModelProvider(this).get(orderViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, Navigation.findNavController(view!!))
+                ||super.onOptionsItemSelected(item)
     }
 
 }
