@@ -66,8 +66,8 @@ class LoginFragment : Fragment() {
             valid = false
         }
 
-        if(password.isEmpty() || password.length < 6){
-            binding.passwordTextId.setError("Password enter Password")
+        if(password.isEmpty()){
+            binding.passwordTextId.setError("Please enter Password")
             valid = false
         }
         return valid
