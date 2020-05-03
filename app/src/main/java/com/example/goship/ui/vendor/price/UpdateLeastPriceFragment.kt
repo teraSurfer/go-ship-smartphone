@@ -44,7 +44,6 @@ class UpdateLeastPriceFragment : Fragment() {
         var destination = UpdateLeastPriceFragmentArgs.fromBundle(arguments!!).destinationdivision
 
         updateLeastPriceViewModel = ViewModelProviders.of(this).get(UpdateLeastPriceViewModel::class.java)
-        val loginViewModel : LoginViewModel by activityViewModels()
 
         binding.textView4.text = source
         binding.textView5.text = destination
@@ -67,7 +66,7 @@ class UpdateLeastPriceFragment : Fragment() {
                 toast.show()
             }
             else{
-                updateLeastPrice(source, destination, updateLeastPriceViewModel.leastprice.value.toString(), loginViewModel.email.value.toString())
+                updateLeastPrice(source, destination)
             }
         }
         updateLeastPriceViewModel.getLeastPrice(source, destination)
@@ -76,13 +75,13 @@ class UpdateLeastPriceFragment : Fragment() {
         return binding.root
     }
 
-    private fun updateLeastPrice(source: String, destination: String, price: String, v_email: String) {
-
+    private fun updateLeastPrice(source: String, destination: String) {
+        val loginViewModel : LoginViewModel by activityViewModels()
         val json = JSONObject()
         json.put("sourcedivision", source)
         json.put("destinationdivision", destination)
-        json.put("price", price)
-        json.put("v_email", v_email)
+        json.put("price", updateLeastPriceViewModel.leastprice.value.toString())
+        json.put("v_email", loginViewModel.email.value.toString())
 
         val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json"), json.toString())
         UpdateLeastPriceAPI.retrofitService.post(

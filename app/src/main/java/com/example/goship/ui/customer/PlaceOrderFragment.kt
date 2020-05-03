@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -22,6 +23,7 @@ import com.example.goship.dataproperty.EstimateProperty
 import com.example.goship.dataproperty.OrderSuccessProperty
 import com.example.goship.network.EstimateAPI
 import com.example.goship.network.PlaceOrderAPI
+import com.example.goship.ui.user.LoginViewModel
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import org.json.JSONObject
@@ -108,11 +110,12 @@ class PlaceOrderFragment : Fragment() {
 
 
     private fun  placeOrder() {
+        val loginViewModel : LoginViewModel by activityViewModels()
 
         val json = JSONObject()
         json.put("origin", viewModel.source.toInt())
         json.put("destination", viewModel.destination.toInt())
-        json.put("u_email", "amit.vijapure@sjsu.edu")
+        json.put("u_email", loginViewModel.email.value.toString())
         json.put("o_address", viewModel.source_address)
         json.put("d_address", viewModel.destination_address)
         json.put("weight", viewModel.weight)
