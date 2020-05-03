@@ -48,7 +48,7 @@ class UpdateLeastPriceFragment : Fragment() {
         binding.textView4.text = source
         binding.textView5.text = destination
         updateLeastPriceViewModel.leastprice.observe(viewLifecycleOwner, Observer { price ->
-            binding.textView7.text = price.toString()
+            binding.textView7.text = price.toString() + "$"
         })
 
         binding.minusButton.setOnClickListener { _: View ->
