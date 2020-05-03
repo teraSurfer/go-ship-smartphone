@@ -4,9 +4,12 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 
 import com.example.goship.R
 import com.example.goship.databinding.FragmentOrderSuccessBinding
@@ -36,6 +39,7 @@ class OrderSuccessFragment : Fragment() {
         binding.textPrice.text = "Price: $"+ OrderSuccessFragmentArgs.fromBundle(arguments!!).price
         binding.textWeight.text = "Weight(KG): "+ OrderSuccessFragmentArgs.fromBundle(arguments!!).weight
 
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -43,6 +47,11 @@ class OrderSuccessFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(OrderSuccessViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, Navigation.findNavController(view!!))
+                ||super.onOptionsItemSelected(item)
     }
 
 }
