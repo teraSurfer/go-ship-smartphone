@@ -67,6 +67,30 @@ object LeastPriceAPI {
     }
 }
 
+interface AddCustomerService {
+    @POST("/adduser") //realestate Retrofit appends the endpoint to the base URL
+    fun post(@Body request: RequestBody
+    ): Call<ResponseBody>
+}
+
+object AddCustomerAPI {
+    val retrofitService : AddCustomerService by lazy {
+        retrofit.create(AddCustomerService::class.java)
+    }
+}
+
+interface AddVendorService {
+    @POST("/addvendor") //realestate Retrofit appends the endpoint to the base URL
+    fun post(@Body request: RequestBody
+    ): Call<ResponseBody>
+}
+
+object AddVendorAPI {
+    val retrofitService : AddVendorService by lazy {
+        retrofit.create(AddVendorService::class.java)
+    }
+}
+
 interface PincodeService {
     @GET("/pincode") //realestate Retrofit appends the endpoint to the base URL
     fun getProperties(@Query("pincode") pincode: String
@@ -134,7 +158,8 @@ interface GetClientAllOrdersService {
  * A public Api object that exposes the lazy-initialized Retrofit service
  * each time your app calls WeatherApi.retrofitService, it will get a singleton Retrofit object that implements ApiService.
  */
-object ClientAllOrdersAPI {
+object
+ClientAllOrdersAPI {
     val retrofitService : GetClientAllOrdersService by lazy {
         retrofit.create(GetClientAllOrdersService::class.java) }
     //The Retrofit create() method creates the Retrofit service itself with the ApiService interface.

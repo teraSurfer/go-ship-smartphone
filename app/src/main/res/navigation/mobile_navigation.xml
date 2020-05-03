@@ -3,7 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/nav_customer_estimate">
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.goship.ui.user.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_nav_vendor_estimate"
+            app:destination="@id/nav_vendor_estimate" />
+        <action
+            android:id="@+id/action_loginFragment_to_nav_customer_estimate"
+            app:destination="@id/nav_customer_estimate" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerUserFragment"
+            app:destination="@id/registerUserFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_customer_estimate"
@@ -108,7 +124,9 @@
     <fragment
         android:id="@+id/nav_orderDetails"
         android:name="com.example.goship.ui.orders.orderdetails.OrderDetailsFragment"
-        android:label="@string/menu_order_details">
+        android:label="@string/menu_order_details"
+        tools:layout="@layout/fragment_order_details">
+
         <argument
             android:name="orderPosition"
             app:argType="integer"
@@ -117,4 +135,9 @@
             android:name="ordersIDs"
             app:argType="string[]" />
     </fragment>
+    <fragment
+        android:id="@+id/registerUserFragment"
+        android:name="com.example.goship.ui.user.RegisterUserFragment"
+        android:label="RegisterUserFragment"
+        tools:layout="@layout/fragment_register_user"/>
 </navigation>

@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 
 import com.example.goship.R
 import com.example.goship.databinding.FragmentEstimatePriceBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
 class EstimatePriceFragment : Fragment() {
 
@@ -25,6 +26,13 @@ class EstimatePriceFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val menu  = activity?.nav_view?.menu;
+        if (menu != null) {
+            menu.findItem(R.id.nav_vendor_estimate).isVisible = false
+            menu.findItem(R.id.nav_customer_estimate).isVisible = true
+        }
+        activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)?.visibility  = View.VISIBLE
+
         val binding = DataBindingUtil.inflate<FragmentEstimatePriceBinding>(inflater, R.layout.fragment_estimate_price,container,false)
 
         viewModel = ViewModelProviders.of(this).get(EstimatePriceViewModel::class.java)
