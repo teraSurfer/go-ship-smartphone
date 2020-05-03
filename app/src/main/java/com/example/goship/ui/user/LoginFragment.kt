@@ -1,6 +1,7 @@
 package com.example.goship.ui.user
 
 import android.os.Bundle
+import android.util.Patterns
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.goship.R
 import com.example.goship.databinding.FragmentLoginBinding
+import com.example.goship.databinding.FragmentRegisterUserBinding
 
 
 class LoginFragment : Fragment() {
@@ -29,18 +31,20 @@ class LoginFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentLoginBinding>(inflater, R.layout.fragment_login,container,false)
 
         binding.loginButton.setOnClickListener { view: View ->
-            loginViewModel.email.value = binding.emailTextId.text.toString()
-            if (binding.loginAsCustomerRadioButton.isChecked){
-                loginViewModel.isCustomer.value = true
+            if(validateInputs(binding)){
+                loginViewModel.email.value = binding.emailTextId.text.toString()
+                if (binding.loginAsCustomerRadioButton.isChecked){
+                    loginViewModel.isCustomer.value = true
 
-                Navigation.findNavController(view).navigate(
-                    LoginFragmentDirections.actionLoginFragmentToNavCustomerEstimate()
-                )
-            }else {
-                loginViewModel.isCustomer.value = false
-                Navigation.findNavController(view).navigate(
-                    LoginFragmentDirections.actionLoginFragmentToNavVendorEstimate()
-                )
+                    Navigation.findNavController(view).navigate(
+                        LoginFragmentDirections.actionLoginFragmentToNavCustomerEstimate()
+                    )
+                }else {
+                    loginViewModel.isCustomer.value = false
+                    Navigation.findNavController(view).navigate(
+                        LoginFragmentDirections.actionLoginFragmentToNavVendorEstimate()
+                    )
+                }
             }
         }
 
@@ -50,5 +54,22 @@ class LoginFragment : Fragment() {
             )
         }
         return binding.root
+    }
+
+    private fun validateInputs(binding: FragmentLoginBinding) : Boolean{
+        var valid = true
+        val email = binding.emailTextId.text.toString()
+        val password = binding.passwordTextId.text.toString()
+
+        if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            binding.emailTextId.setError("Please enter valid Email")
+            valid = false
+        }
+
+        if(password.isEmpty() || password.length < 6){
+            binding.passwordTextId.setError("Password enter Password")
+            valid = false
+        }
+        return valid
     }
 }
