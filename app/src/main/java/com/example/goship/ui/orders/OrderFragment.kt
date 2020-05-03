@@ -66,7 +66,14 @@ class OrderFragment : Fragment() {
             Toast.makeText(getContext(),
                 "Network Error: ${it}", Toast.LENGTH_LONG).show()
         })
+
+        orderViewModel.vmNoDAta.observe(viewLifecycleOwner, Observer {
+            binding.textNoData.setText("No Order Placed")
+            binding.textNoData.visibility = it
+        })
+
         setHasOptionsMenu(true)
+
         return  binding.root
     }
 

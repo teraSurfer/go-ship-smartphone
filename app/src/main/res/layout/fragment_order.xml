@@ -20,5 +20,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/fragment_order_item_list" />
+
+        <TextView
+            android:id="@+id/textNoData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/ordersCustomerList"
+            app:layout_constraintStart_toStartOf="@+id/ordersCustomerList"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.221" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
