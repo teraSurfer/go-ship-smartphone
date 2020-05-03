@@ -95,7 +95,7 @@ class OrderDetailsViewModel : ViewModel() {
                     vmTextVendorEmail.value = "<b>email: </b><u>  ${response.body()?.v_email}</u>"
                     vmTextPrice.value = "<b>Price: </b><u>  $${response.body()?.price}</u>"
                     vmTextWeight.value = "<b>Weight: </b><u>  ${response.body()?.weight}</u>"
-                    textOrigenDate.value = "<b>Shipped date: </b><u>  ${response.body()?.o_date}</u>"
+                    textOrigenDate.value = "<b>Order date: </b><u>  ${response.body()?.o_date}</u>"
                     textOrigenMobile.value = "<b>Mobile: </b><u>  ${response.body()?.o_mobile}</u>"
                     textOrigenAddress.value = "<b>Address: </b><u>  ${response.body()?.o_address}</u>"
                     textPickDate.value = "<b>Pick up date: </b><u>  ${response.body()?.p_date}</u>"
