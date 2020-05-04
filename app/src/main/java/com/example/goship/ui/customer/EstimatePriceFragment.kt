@@ -2,11 +2,9 @@ package com.example.goship.ui.customer
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -29,6 +27,7 @@ class EstimatePriceFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val menu  = activity?.nav_view?.menu;
         if (menu != null) {
             menu.findItem(R.id.nav_vendor_estimate).isVisible = false
@@ -93,6 +92,12 @@ class EstimatePriceFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.onNavDestinationSelected(item, Navigation.findNavController(view!!))
                 ||super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //menuInflater.inflate(R.menu.main, menu)
+        menu[0].setVisible(true)
     }
 
 }
