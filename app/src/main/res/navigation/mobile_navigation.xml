@@ -138,6 +138,10 @@
     <fragment
         android:id="@+id/registerUserFragment"
         android:name="com.example.goship.ui.user.RegisterUserFragment"
-        android:label="RegisterUserFragment"
-        tools:layout="@layout/fragment_register_user"/>
+        android:label="@string/register_user_fragment"
+        tools:layout="@layout/fragment_register_user">
+        <action
+            android:id="@+id/action_registerUserFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

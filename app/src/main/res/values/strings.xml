@@ -8,6 +8,8 @@
     <string name="action_logout">Logout</string>
     <string name="success_authentication">Login Successful</string>
     <string name="error_authentication_failed">Login Failed</string>
+    <string name="register_user_fragment">Register User</string>
+
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
