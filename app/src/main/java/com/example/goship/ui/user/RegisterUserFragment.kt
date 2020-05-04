@@ -120,6 +120,7 @@ class RegisterUserFragment : Fragment() {
             json.put("name", firstname+lastname)
             json.put("mobile", mobile)
         }
+        json.put("password", password)
 
         val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json"), json.toString())
         AddCustomerAPI.retrofitService.post(
