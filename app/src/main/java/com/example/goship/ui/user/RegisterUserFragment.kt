@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 
@@ -17,6 +18,7 @@ import com.example.goship.databinding.FragmentRegisterUserBinding
 import com.example.goship.network.AddCustomerAPI
 import com.example.goship.network.AddVendorAPI
 import com.example.goship.network.UpdateLeastPriceAPI
+import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -37,7 +39,8 @@ class RegisterUserFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)?.visibility  = View.INVISIBLE
+        activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)?.visibility  = View.VISIBLE
+
         val binding = DataBindingUtil.inflate<FragmentRegisterUserBinding>(inflater, R.layout.fragment_register_user,container,false)
 
         registerUserViewModel = ViewModelProviders.of(this).get(RegisterUserViewModel::class.java)
@@ -59,7 +62,8 @@ class RegisterUserFragment : Fragment() {
                     email = email,
                     mobile = mobile,
                     password = password,
-                    isCustomer = isCustomer
+                    isCustomer = isCustomer,
+                    view = view
                 )
             }
         }
@@ -108,8 +112,7 @@ class RegisterUserFragment : Fragment() {
         return valid
     }
 
-    private fun register(firstname: String, lastname: String, email: String, mobile: String, password: String, isCustomer: Boolean) {
-
+    private fun register(firstname: String, lastname: String, email: String, mobile: String, password: String, isCustomer: Boolean, view: View) {
         val json = JSONObject()
         if(isCustomer){
             json.put("u_email", email)
@@ -122,34 +125,46 @@ class RegisterUserFragment : Fragment() {
         }
         json.put("password", password)
 
-        val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json"), json.toString())
-        AddCustomerAPI.retrofitService.post(
-            requestBody).enqueue(
-            object : Callback<ResponseBody> {
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+        val obj = object : Callback<ResponseBody> {
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                val toast = Toast.makeText(context,
+                    context!!.getText(R.string.error_failed_to_register).toString() + t.message, Toast.LENGTH_LONG)
+                toast.show()
+            }
+
+            override fun onResponse(
+                call: Call<ResponseBody>,
+                response: Response<ResponseBody>
+            ) {
+                if(response.code() == 200){
                     val toast = Toast.makeText(context,
-                        context!!.getText(R.string.error_failed_to_register).toString() + t.message, Toast.LENGTH_LONG)
+                        context!!.getText(R.string.success_user_register), Toast.LENGTH_SHORT
+                    )
+                    toast.show()
+                    Navigation.findNavController(view).navigate(
+                        RegisterUserFragmentDirections.actionRegisterUserFragmentToLoginFragment())
+                }
+                else{
+                    val toast = Toast.makeText(context,
+                        context!!.getText(R.string.error_failed_to_register).toString(), Toast.LENGTH_LONG)
                     toast.show()
                 }
 
-                override fun onResponse(
-                    call: Call<ResponseBody>,
-                    response: Response<ResponseBody>
-                ) {
-                    if(response.code() == 200){
-                        val toast = Toast.makeText(context,
-                            context!!.getText(R.string.success_user_register), Toast.LENGTH_SHORT
-                        )
-                        toast.show()
-                    }
-                    else{
-                        val toast = Toast.makeText(context,
-                            context!!.getText(R.string.error_failed_to_register).toString(), Toast.LENGTH_LONG)
-                        toast.show()
-                    }
-
-                }
             }
-        )
+        }
+
+        val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json"), json.toString())
+        if(isCustomer){
+            AddCustomerAPI.retrofitService.post(
+                requestBody).enqueue(
+                obj
+            )
+        }else{
+            AddVendorAPI.retrofitService.post(
+                requestBody).enqueue(
+                obj
+            )
+        }
     }
+
 }

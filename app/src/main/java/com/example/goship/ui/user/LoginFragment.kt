@@ -45,19 +45,8 @@ class LoginFragment : Fragment() {
                 val email = binding.emailTextId.text.toString()
                 val password = binding.passwordTextId.text.toString()
                 loginViewModel.email.value = email
-                if(login(email = email, password = password, isCustomer = binding.loginAsCustomerRadioButton.isChecked)){
-                    if (binding.loginAsCustomerRadioButton.isChecked){
-                        Navigation.findNavController(view).navigate(
-                            LoginFragmentDirections.actionLoginFragmentToNavCustomerEstimate())
-                        loginViewModel.isCustomer.value = true
 
-                    }else {
-                        loginViewModel.isCustomer.value = false
-                        Navigation.findNavController(view).navigate(
-                            LoginFragmentDirections.actionLoginFragmentToNavVendorEstimate()
-                        )
-                    }
-                }
+                login(email = email, password = password, isCustomer = binding.loginAsCustomerRadioButton.isChecked, binding = binding, view = view)
             }
         }
 
@@ -86,8 +75,7 @@ class LoginFragment : Fragment() {
         return valid
     }
 
-    private fun login(email: String, password: String, isCustomer: Boolean) : Boolean {
-        var isLoggedIn = false
+    private fun login(email: String, password: String, isCustomer: Boolean, binding: FragmentLoginBinding, view : View)  {
         val json = JSONObject()
         if(isCustomer){
             json.put("customer", true)
@@ -115,8 +103,19 @@ class LoginFragment : Fragment() {
                         val toast = Toast.makeText(context,
                             context!!.getText(R.string.success_authentication), Toast.LENGTH_SHORT
                         )
-                        isLoggedIn = true
+
                         toast.show()
+                        if (binding.loginAsCustomerRadioButton.isChecked){
+                            Navigation.findNavController(view).navigate(
+                                LoginFragmentDirections.actionLoginFragmentToNavCustomerEstimate())
+                            loginViewModel.isCustomer.value = true
+
+                        }else {
+                            loginViewModel.isCustomer.value = false
+                            Navigation.findNavController(view).navigate(
+                                LoginFragmentDirections.actionLoginFragmentToNavVendorEstimate()
+                            )
+                        }
                     }
                     else{
                         val toast = Toast.makeText(context,
@@ -127,6 +126,5 @@ class LoginFragment : Fragment() {
                 }
             }
         )
-        return isLoggedIn
     }
 }
