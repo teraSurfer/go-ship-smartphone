@@ -45,6 +45,7 @@ class LoginFragment : Fragment() {
                 val email = binding.emailTextId.text.toString()
                 val password = binding.passwordTextId.text.toString()
                 loginViewModel.email.value = email
+
                 login(email = email, password = password, isCustomer = binding.loginAsCustomerRadioButton.isChecked, binding = binding, view = view)
             }
         }
@@ -102,6 +103,7 @@ class LoginFragment : Fragment() {
                         val toast = Toast.makeText(context,
                             context!!.getText(R.string.success_authentication), Toast.LENGTH_SHORT
                         )
+
                         toast.show()
                         if (binding.loginAsCustomerRadioButton.isChecked){
                             Navigation.findNavController(view).navigate(
