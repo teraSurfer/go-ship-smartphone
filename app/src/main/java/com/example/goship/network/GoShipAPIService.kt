@@ -67,6 +67,18 @@ object LeastPriceAPI {
     }
 }
 
+interface LoginService {
+    @POST("/login") //realestate Retrofit appends the endpoint to the base URL
+    fun post(@Body request: RequestBody
+    ): Call<ResponseBody>
+}
+
+object LoginAPI {
+    val retrofitService : LoginService by lazy {
+        retrofit.create(LoginService::class.java)
+    }
+}
+
 interface AddCustomerService {
     @POST("/adduser") //realestate Retrofit appends the endpoint to the base URL
     fun post(@Body request: RequestBody
