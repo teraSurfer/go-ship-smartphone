@@ -8,17 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 
 import com.example.goship.R
-import com.example.goship.databinding.FragmentLoginBinding
 import com.example.goship.databinding.FragmentRegisterUserBinding
 import com.example.goship.network.AddCustomerAPI
 import com.example.goship.network.AddVendorAPI
-import com.example.goship.network.UpdateLeastPriceAPI
-import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import okhttp3.ResponseBody

@@ -1,11 +1,8 @@
 package com.example.goship.ui.orders.orderdetails
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -14,6 +11,7 @@ import com.example.goship.R
 import com.example.goship.databinding.FragmentOrderDetailsBinding
 import android.widget.ArrayAdapter
 import androidx.core.text.HtmlCompat
+import androidx.core.view.get
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 
@@ -182,5 +180,11 @@ class OrderDetailsFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.onNavDestinationSelected(item, Navigation.findNavController(view!!))
                 ||super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //menuInflater.inflate(R.menu.main, menu)
+        menu[0].setVisible(true)
     }
 }

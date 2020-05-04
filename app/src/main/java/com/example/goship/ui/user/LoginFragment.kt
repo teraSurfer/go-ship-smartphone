@@ -7,13 +7,9 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.example.goship.R
 import com.example.goship.databinding.FragmentLoginBinding
-import com.example.goship.databinding.FragmentRegisterUserBinding
-import com.example.goship.network.AddCustomerAPI
 import com.example.goship.network.LoginAPI
 import okhttp3.MediaType
 import okhttp3.RequestBody

@@ -2,15 +2,11 @@ package com.example.goship.ui.vendor.price
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import androidx.core.view.isVisible
+import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -19,7 +15,7 @@ import androidx.navigation.ui.NavigationUI
 import com.example.goship.R
 import com.example.goship.databinding.FragmentShowLeastPriceBinding
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_show_least_price.view.*
+
 
 class ShowLeastPriceFragment : Fragment() {
 
@@ -81,4 +77,9 @@ class ShowLeastPriceFragment : Fragment() {
                 ||super.onOptionsItemSelected(item)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //menuInflater.inflate(R.menu.main, menu)
+        menu[0].setVisible(true)
+    }
 }
